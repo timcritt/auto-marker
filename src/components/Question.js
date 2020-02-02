@@ -3,7 +3,9 @@ import React from 'react';
 class Question extends React.Component {
 
   state = {
-    userAnswer: ""
+    userAnswer: "",
+    correctlyAnswered: false,
+    answered: false
   }
 
   render() {
@@ -11,7 +13,18 @@ class Question extends React.Component {
       <div>
         <p>{this.props.question.question}</p>
         <input onChange={this.updateUserAnswer}></input>
-        <button onClick={this.checkQuestion}>Check</button>
+        <button onClick={this.checkUserAnswer}>Check</button>
+        {this.state.correctlyAnswered && this.state.answered ? (
+          <span style={{color: "green"}}> correct!</span>
+        ) : (
+          ''
+        )}
+        {!this.state.correctlyAnswered && this.state.answered ? (
+          <span style={{color: "red"}}> incorrect!</span>
+        ) : (
+          ''
+        )}
+        
       </div>
     )
   }
@@ -26,11 +39,19 @@ class Question extends React.Component {
       userAnswer
     });
   }
-  checkQuestion = (userAnswer) => {
-    if (this.state.answer === this.state.userAnswer) {
+  checkUserAnswer = () => {
+    if (this.props.question.answer.toLowerCase() === this.state.userAnswer.toLowerCase()) {
       alert("correct!");
+      this.setState({
+        correctlyAnswered: true,
+        answered: true
+      })
     } else {
       alert("incorrect!");
+      this.setState({
+        correctlyAnswered: false,
+        answered: true
+      })
     }
   }
 }
