@@ -7,8 +7,7 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    questions: {},
-
+    questions: []
   }
   loadSampleQuestions = () => {
     const questions = sampleQuestions;
@@ -16,14 +15,25 @@ class App extends React.Component {
       questions
     })
   }
-
   render() {
     return (
       <div>
-        <Quiz loadSampleQuestions={this.loadSampleQuestions}></Quiz>
-        <CreateQuiz></CreateQuiz>
+        <Quiz loadSampleQuestions={this.loadSampleQuestions}
+          questions={this.state.questions}
+        />
+        <CreateQuiz questions={this.state.questions}
+          updateQuestion={this.updateQuestion}
+        />  
       </div>
     )
+  }
+  updateQuestion = (questionIndex, updatedQuestion) => {
+    const questions = this.state.questions;
+    questions[questionIndex].question = updatedQuestion;
+    this.setState({
+      questions
+    })
+
   }
 
 }

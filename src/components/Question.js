@@ -7,11 +7,10 @@ class Question extends React.Component {
     correctlyAnswered: false,
     answered: false
   }
-
   render() {
     return (
-      <div>
-        <p>{this.props.question.question}</p>
+      <li>
+        {this.props.question.question}
         <input onChange={this.updateUserAnswer}></input>
         <button onClick={this.checkUserAnswer}>Check</button>
         {this.state.correctlyAnswered && this.state.answered ? (
@@ -25,7 +24,7 @@ class Question extends React.Component {
           ''
         )}
         
-      </div>
+      </li>
     )
   }
   setQuestion(question) {
@@ -41,13 +40,11 @@ class Question extends React.Component {
   }
   checkUserAnswer = () => {
     if (this.props.question.answer.toLowerCase() === this.state.userAnswer.toLowerCase()) {
-      alert("correct!");
       this.setState({
         correctlyAnswered: true,
         answered: true
       })
     } else {
-      alert("incorrect!");
       this.setState({
         correctlyAnswered: false,
         answered: true

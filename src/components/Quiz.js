@@ -1,33 +1,27 @@
 import React from 'react';
 import Question from './Question';
-import sampleQuestions from "../sampleQuestions";
+
 
 class Quiz extends React.Component {
-  state = {
-    questions: ["Question 1", "Question 2", "Question 3"],
-  }
-  loadSampleQuestions = () => {
-    const questions = sampleQuestions;
-    this.setState( {
-      questions
-    })
-  }
-
+  
   render() {
     return (
       <div>
-        <button onClick={this.loadSampleQuestions}>Load Sample Questions</button>
-        <ul>
-          {Object.keys(this.state.questions)
+        <button onClick={this.props.loadSampleQuestions}>Load Sample Questions</button>
+        <ol type="1">
+          {Object.keys(this.props.questions)
             .map(key => 
               <Question 
                 key={key}
-                question={this.state.questions[key]}
+                index={key}
+                question={this.props.questions[key]}
                 >
               </Question>
             )
           }
-        </ul> 
+        </ol>
+        <button>Edit Quiz</button>
+        
       </div>
     );
   }
