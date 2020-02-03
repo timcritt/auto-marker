@@ -1,7 +1,8 @@
 import React from 'react';
 
 import Quiz from './components/Quiz';
-
+import CreateQuiz from './components/CreateQuiz';
+import sampleQuestions from "./sampleQuestions";
 import './App.css';
 
 class App extends React.Component {
@@ -9,9 +10,20 @@ class App extends React.Component {
     questions: {},
 
   }
+  loadSampleQuestions = () => {
+    const questions = sampleQuestions;
+    this.setState( {
+      questions
+    })
+  }
 
   render() {
-    return <Quiz></Quiz>;
+    return (
+      <div>
+        <Quiz loadSampleQuestions={this.loadSampleQuestions}></Quiz>
+        <CreateQuiz></CreateQuiz>
+      </div>
+    )
   }
 
 }

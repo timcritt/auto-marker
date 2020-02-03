@@ -11,7 +11,7 @@ class Question extends React.Component {
   render() {
     return (
       <div>
-        <p>{this.props.question.question}</p>
+        {this.props.question.question}
         <input onChange={this.updateUserAnswer}></input>
         <button onClick={this.checkUserAnswer}>Check</button>
         {this.state.correctlyAnswered && this.state.answered ? (
@@ -24,7 +24,6 @@ class Question extends React.Component {
         ) : (
           ''
         )}
-        
       </div>
     )
   }
