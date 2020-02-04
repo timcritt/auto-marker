@@ -27,6 +27,8 @@ class App extends React.Component {
         <CreateQuiz questions={this.state.questions}
           updateQuestion={this.updateQuestion}
           updateAnswer={this.updateAnswer}
+          addQuestion={this.addQuestion}
+          deleteQuestion={this.deleteQuestion}
         />  
       </div>
     )
@@ -45,11 +47,32 @@ class App extends React.Component {
     this.setState(
       questions
     )
-
   }
+  addQuestion = (e) => {
+    //gets the index of the question as ordered in the list of questions
+    var listIndex = e.currentTarget.previousElementSibling.childElementCount + 1;
+    const newQuestion = {
+      question: `Question ${listIndex}`,
+      answer: ''
+    }
 
+    const myDate = new Date();
+    const index = myDate.getMilliseconds();
 
+    const questions = this.state.questions;
+    questions[`question${index}`] = newQuestion;
 
+    this.setState({
+      questions
+    })
+  }
+  deleteQuestion = (key) => {
+    const questions = this.state.questions
+    delete questions[key];
+    this.setState( {
+      questions
+    })
+  }
 }
 
 export default App;

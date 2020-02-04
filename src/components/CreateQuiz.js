@@ -1,5 +1,4 @@
 import React from 'react';
-import Question from './Question';
 import QuestionField from './QuestionField'
 
 
@@ -18,16 +17,19 @@ class CreateQuiz extends React.Component {
                 question={this.props.questions[key]}
                 updateQuestion={this.props.updateQuestion}
                 updateAnswer={this.props.updateAnswer}
+                addQuestion={this.props.addQuestion}
+                deleteQuestion={this.props.deleteQuestion}
                 >
               </QuestionField>
             )
           }
         </ol>
+        <button onClick={this.handleAddQuestion}>Add</button>
       </div>
     )
   }
-  addQuestion() {
-    
+  handleAddQuestion = (e) => {
+    this.props.addQuestion(e)
   }
 }
 

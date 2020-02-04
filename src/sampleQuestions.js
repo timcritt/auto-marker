@@ -9,10 +9,7 @@ const sampleQuestions = {
     question: "What is the capital of England? ",
     answer: "London"
   },
-  question3: {
-    question: "What colour is red? ",
-    answer: "red"
-  }
+ 
 }
 
 export default sampleQuestions;

@@ -15,7 +15,6 @@ class QuestionField extends React.Component {
       answerIsUpdated: true
     })
   }
-
   updateQuestionField = (e) => {
     const newQuestion = e.currentTarget.value;
     console.log(newQuestion);
@@ -36,9 +35,10 @@ class QuestionField extends React.Component {
           onChange={this.updateQuestionField}
         />
         <button disabled={!this.state.questionIsUpdated} onClick={() => {
-                  console.log(this.props.index)
           this.props.updateQuestion(this.props.index, this.state.editedQuestion)
-        }}>save</button>
+        }}
+        >save
+        </button>
 
         <label>   Answer:  </label>
         <input size={30}type="text" 
@@ -46,9 +46,11 @@ class QuestionField extends React.Component {
           onChange={this.updateAnswerField}
         />
         <button disabled={!this.state.answerIsUpdated} onClick={() => {
-                  console.log(this.props.index)
           this.props.updateAnswer(this.props.index, this.state.editedAnswer)
-        }}>save</button> 
+        }}>
+        save
+        </button> 
+        <button onClick={() => this.props.deleteQuestion(this.props.index)}>delete</button>
       </li>
     )
   }

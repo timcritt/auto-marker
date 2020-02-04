@@ -10,7 +10,7 @@ class Question extends React.Component {
   render() {
     return (
       <li>
-        {this.props.question.question}
+        <div>{this.props.question.question}</div>
         <input onChange={this.updateUserAnswer}></input>
         <button onClick={this.checkUserAnswer}>Check</button>
         {this.state.correctlyAnswered && this.state.answered ? (
