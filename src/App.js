@@ -26,9 +26,12 @@ class App extends React.Component {
         />
         <CreateQuiz questions={this.state.questions}
           updateQuestion={this.updateQuestion}
-          updateAnswer={this.updateAnswer}
           addQuestion={this.addQuestion}
           deleteQuestion={this.deleteQuestion}
+          updateAnswer={this.updateAnswer}
+          
+          addHint={this.addHint}
+          updateHint={this.updateHint}
         />  
       </div>
     )
@@ -65,6 +68,16 @@ class App extends React.Component {
     this.setState({
       questions
     })
+  }
+  
+  updateHint = (questionIndex, updatedHint) => {
+        
+    console.log(updatedHint)
+    const questions = {...this.state.questions}
+    questions[questionIndex].hint = updatedHint;
+    this.setState(
+      questions
+    )
   }
   deleteQuestion = (key) => {
     const questions = this.state.questions

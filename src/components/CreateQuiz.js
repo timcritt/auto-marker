@@ -19,17 +19,16 @@ class CreateQuiz extends React.Component {
                 updateAnswer={this.props.updateAnswer}
                 addQuestion={this.props.addQuestion}
                 deleteQuestion={this.props.deleteQuestion}
+                addHint={this.props.addHint}
+                updateHint={this.props.updateHint}
                 >
               </QuestionField>
             )
           }
         </ol>
-        <button onClick={this.handleAddQuestion}>Add</button>
+        <button onClick={(e) => this.props.addQuestion(e)}>Add</button>
       </div>
     )
-  }
-  handleAddQuestion = (e) => {
-    this.props.addQuestion(e)
   }
 }
 

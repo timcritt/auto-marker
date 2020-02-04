@@ -15,12 +15,14 @@ class Quiz extends React.Component {
                 key={key}
                 index={key}
                 question={this.props.questions[key]}
+                addHint={this.props.addHint}
                 >
               </Question>
+              
             )
           }
         </ol>
-        <button>Edit Quiz</button>
+        <button >Edit Quiz</button>
         
       </div>
     );

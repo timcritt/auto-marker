@@ -5,8 +5,17 @@ class QuestionField extends React.Component {
   state = {
     editedQuestion: this.props.question ? this.props.question.question : 'hello',
     editedAnswer: this.props.question ? this.props.question.answer : 'answer',
+    editedHint: this.props.question.hint ? this.props.question.hint : 'no hint',
     questionIsUpdated: false,
-    answerIsUpdated: false
+    answerIsUpdated: false,
+    hasSeenHint: false
+  }
+  setSeenHint() {
+    this.setState({
+      hasSeenHint: true
+    })
+
+    console.log(this.state.hasSeenHint)
   }
   updateAnswerField = (e) => {
     const newAnswer = e.currentTarget.value;
@@ -23,10 +32,18 @@ class QuestionField extends React.Component {
       questionIsUpdated: true
     })
   }
+  updateHintField = (e) => {
+    const newHint = e.currentTarget.value;
+    console.log(`the updated hint field = ${newHint}`)
+    this.setState({
+      editedHint: newHint
+    })
+  }
   render() {
 
     const editedQuestion = this.state.editedQuestion;
     const editedAnswer = this.state.editedAnswer;
+    const editedHint = this.state.editedHint
     return (
       <li>
         <label>   question:  </label>
@@ -50,7 +67,14 @@ class QuestionField extends React.Component {
         }}>
         save
         </button> 
-        <button onClick={() => this.props.deleteQuestion(this.props.index)}>delete</button>
+        <label> Hint: </label>
+        <input size={editedHint.length > 30 ? editedHint.length : 30} type="text"
+          defaultValue={editedHint != null ? editedHint : ''}
+          onChange={this.updateHintField}
+          
+        />
+        <button onClick={() => this.props.updateHint(this.props.index, this.state.editedHint)}>save</button>
+        <button onClick={() => this.props.deleteQuestion(this.props.index)}>delete question</button>
       </li>
     )
   }
