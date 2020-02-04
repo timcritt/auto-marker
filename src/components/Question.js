@@ -27,11 +27,7 @@ class Question extends React.Component {
       </li>
     )
   }
-  setQuestion(question) {
-    this.setState({
-      question: question
-    })
-  }
+  
   updateUserAnswer = (e) => {
     var userAnswer = e.currentTarget.value;
     this.setState({

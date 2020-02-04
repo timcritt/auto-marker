@@ -5,14 +5,17 @@ import CreateQuiz from './components/CreateQuiz';
 import sampleQuestions from "./sampleQuestions";
 import './App.css';
 
+
 class App extends React.Component {
   state = {
-    questions: []
+    questions: {},
+    
   }
   loadSampleQuestions = () => {
-    const questions = sampleQuestions;
+    const questions = {...sampleQuestions};
+    console.log(questions)
     this.setState( {
-      questions
+      questions: sampleQuestions
     })
   }
   render() {
@@ -23,18 +26,29 @@ class App extends React.Component {
         />
         <CreateQuiz questions={this.state.questions}
           updateQuestion={this.updateQuestion}
+          updateAnswer={this.updateAnswer}
         />  
       </div>
     )
   }
   updateQuestion = (questionIndex, updatedQuestion) => {
-    const questions = this.state.questions;
+    const questions = {...this.state.questions}
     questions[questionIndex].question = updatedQuestion;
-    this.setState({
+    this.setState(
       questions
-    })
+    )
 
   }
+  updateAnswer = (questionIndex, updatedAnswer) => {
+    const questions = {...this.state.questions}
+    questions[questionIndex].answer = updatedAnswer;
+    this.setState(
+      questions
+    )
+
+  }
+
+
 
 }
 

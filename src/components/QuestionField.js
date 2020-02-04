@@ -3,26 +3,51 @@ import React from 'react';
 class QuestionField extends React.Component {
 
   state = {
-    question: this.props.question.question
+    editedQuestion: this.props.question ? this.props.question.question : 'hello',
+    editedAnswer: this.props.question ? this.props.question.answer : 'answer',
+    questionIsUpdated: false,
+    answerIsUpdated: false
+  }
+  updateAnswerField = (e) => {
+    const newAnswer = e.currentTarget.value;
+    this.setState({
+      editedAnswer: newAnswer,
+      answerIsUpdated: true
+    })
   }
 
   updateQuestionField = (e) => {
-    var newQuestion = e.currentTarget.value;
+    const newQuestion = e.currentTarget.value;
+    console.log(newQuestion);
     this.setState({
-      question: newQuestion
+      editedQuestion: newQuestion,
+      questionIsUpdated: true
     })
   }
   render() {
+
+    const editedQuestion = this.state.editedQuestion;
+    const editedAnswer = this.state.editedAnswer;
     return (
       <li>
-        <label>question:  </label>
-        <input size={this.props.question.question.length}type="text" 
-          defaultValue={this.state.question}
+        <label>   question:  </label>
+        <input size={30}type="text" 
+          defaultValue={editedQuestion != null ? editedQuestion : ''}
           onChange={this.updateQuestionField}
         />
-        <button onClick={() => {
+        <button disabled={!this.state.questionIsUpdated} onClick={() => {
                   console.log(this.props.index)
-          this.props.updateQuestion(this.props.index, this.state.question)
+          this.props.updateQuestion(this.props.index, this.state.editedQuestion)
+        }}>save</button>
+
+        <label>   Answer:  </label>
+        <input size={30}type="text" 
+          defaultValue={editedAnswer != null ? editedAnswer : ''}
+          onChange={this.updateAnswerField}
+        />
+        <button disabled={!this.state.answerIsUpdated} onClick={() => {
+                  console.log(this.props.index)
+          this.props.updateAnswer(this.props.index, this.state.editedAnswer)
         }}>save</button> 
       </li>
     )
