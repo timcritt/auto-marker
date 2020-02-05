@@ -1,6 +1,7 @@
 import React from 'react';
-import questionStatus from '../enums'
-
+import questionStatus from '../enums';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Html5Entities } from 'html-entities'
 
 class Question extends React.Component {
 
@@ -13,15 +14,16 @@ class Question extends React.Component {
   }
   render() {
     return (
-      <li>
-        <div>{this.props.question.question}</div>
-        <div>
-          <input onChange={this.updateUserAnswer}></input>
-          <button onClick={this.checkUserAnswer}>Check</button>
-          <span>{this.renderQuestionStatus()}</span>
-          <button onClick={this.toggleShowHint}>{this.state.hintVisibilty === 'hidden' ? 'show hint' : 'hide hint'}</button>
-          <span style={{visibility: this.state.hintVisibilty}}>{` ${this.props.question.hint ? this.props.question.hint : 'no hint'  }`}</span>
-        </div>
+      <li>         
+          <div>{this.props.question.question}</div>
+          <div>
+            <input onChange={this.updateUserAnswer}></input>
+            <button onClick={this.checkUserAnswer}>Check</button>
+            <span>{this.renderQuestionStatus()}</span>
+            <button onClick={this.toggleShowHint}>{this.state.hintVisibilty === 'hidden' ? 'show hint' : 'hide hint'}</button>
+            <span style={{visibility: this.state.hintVisibilty}}>{` ${this.props.question.hint ? this.props.question.hint : 'no hint'  }`}</span>
+          </div>
+        
       </li>
     )
   }
