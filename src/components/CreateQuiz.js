@@ -9,7 +9,7 @@ class CreateQuiz extends React.Component {
       <Container>
         <row>
           <Col md={{ span: 6, offset: 3 }}>
-            <ol type="1">
+            
               {Object.keys(this.props.questions)
                 .map(key => 
                   <QuestionField 
@@ -25,8 +25,8 @@ class CreateQuiz extends React.Component {
                   />
                 )
               }
-            </ol>
-            <Button block  onClick={(e) => this.props.addQuestion(e)}>+</Button>
+            
+            <Button block  onClick={(e) => this.props.addQuestion(e)}>+ Add Question</Button>
           </Col>
         </row>
       </Container>

@@ -14,7 +14,7 @@ class Question extends React.Component {
   }
   render() {
     return (
-      <li>         
+        <div>   
           <div>{this.props.question.question}</div>
           <div>
             <input onChange={this.updateUserAnswer}></input>
@@ -23,8 +23,8 @@ class Question extends React.Component {
             <button onClick={this.toggleShowHint}>{this.state.hintVisibilty === 'hidden' ? 'show hint' : 'hide hint'}</button>
             <span style={{visibility: this.state.hintVisibilty}}>{` ${this.props.question.hint ? this.props.question.hint : 'no hint'  }`}</span>
           </div>
-        
-      </li>
+        </div>
+      
     )
   }
   renderQuestionStatus = () => {

@@ -49,8 +49,7 @@ class QuestionField extends React.Component {
     const editedAnswer = this.state.editedAnswer;
     const editedHint = this.state.editedHint
     return (
-      <li>
-        <Col >
+        <>
           <Row >
             <Col>
               <div >
@@ -109,9 +108,7 @@ class QuestionField extends React.Component {
               </ButtonToolbar >
             </Col>
           </Row >
-        </Col>
-      </li>
-        
+        </>   
     )
   }
 }
