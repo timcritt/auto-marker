@@ -4,10 +4,11 @@ import { Html5Entities } from 'html-entities'
 const htmlEntities = new Html5Entities();
 
 const sampleQuestions = {
+   
   question1: {
     question: "What colour is the sky? ",
     answer: "blue",
-    hint: "Look up at it, you bloody moron!"
+    hint: ''
   },
   question2: {
     question: "What is the capital of England? ",
@@ -16,6 +17,11 @@ const sampleQuestions = {
   },
  
 }
+
+
+
+
+
 
 export default sampleQuestions;
 

@@ -55,8 +55,9 @@ class App extends React.Component {
     //gets the index of the question as ordered in the list of questions
     //var listIndex = e.currentTarget.previousElementSibling.childElementCount + 1;
     const newQuestion = {
-      question: `Question new`,
-      answer: ''
+      question: '',
+      answer: '',
+      hint: ''
     }
 
     const myDate = new Date();

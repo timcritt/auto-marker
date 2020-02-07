@@ -8,9 +8,9 @@ const htmlEntities = new Html5Entities();
 class QuestionField extends React.Component {
 
   state = {
-    editedQuestion: this.props.question ? this.props.question.question : 'hello',
-    editedAnswer: this.props.question ? this.props.question.answer : 'answer',
-    editedHint: this.props.question.hint ? this.props.question.hint : 'no hint',
+    editedQuestion: this.props.question ? this.props.question.question : '',
+    editedAnswer: this.props.question ? this.props.question.answer : '',
+    editedHint: this.props.question.hint ? this.props.question.hint : '',
     questionIsUpdated: false,
     answerIsUpdated: false,
   }
@@ -50,64 +50,65 @@ class QuestionField extends React.Component {
     const editedHint = this.state.editedHint
     return (
         <>
-          <Row >
-            <Col>
-              <div >
-                <InputGroup >
-                  <InputGroup.Prepend>
-                    <InputGroup.Text>Q</InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <FormControl defaultValue={editedQuestion != null ? editedQuestion : ''}
-                    onChange={this.updateQuestionField}
-                    placeholder="Recipient's username"
-                    aria-label="Recipient's username"
-                    aria-describedby="basic-addon2"
-                  />
-                </InputGroup>
-              </div>
-            </Col>
-          </Row>
-          {/*answer Field */}
-          <Row>
-            <Col>
-              <div>
-                <InputGroup>
-                  <InputGroup.Prepend>
-                    <InputGroup.Text>A</InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <FormControl defaultValue={editedAnswer != null ? editedAnswer : ''}
-                    onChange={this.updateAnswerField}
-                  />
-                </InputGroup>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <div>
-                <InputGroup>
-                  <InputGroup.Prepend>
-                    <InputGroup.Text>H</InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <FormControl defaultValue={editedHint != null ? editedHint : ''}
-                    onChange={this.updateHintField}
-                  />
-                </InputGroup>
-              </div>
-            </Col>
-          </Row>
-          <Row >
-            <Col >
-              <ButtonToolbar className="d-flex flex-column">
-                <ButtonGroup >
-                  <Button variant="secondary" size="sm" onClick={() => this.saveNewQuestion()}>save</Button>
-                  <Button variant="secondary" size="sm" onClick={() => this.props.deleteQuestion(this.props.index)}>delete</Button>
-                  <Button variant="secondary" size="sm" >{htmlEntities.decode('&#x2304;')}</Button>
-                  <Button variant="secondary" size="sm" >{htmlEntities.decode('&#x2303;')}</Button>
-                </ButtonGroup >
-              </ButtonToolbar >
-            </Col>
-          </Row >
+        {/* question field */}
+          <Col id="question-card-container">
+            <Row >
+              <Col>
+                <div >
+                  <InputGroup >
+                    <InputGroup.Prepend>
+                      <InputGroup.Text>Q</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl placeholder="enter the question" defaultValue={editedQuestion != null ? editedQuestion : ''}
+                      onChange={this.updateQuestionField}
+                    />
+                  </InputGroup>
+                </div>
+              </Col>
+            </Row>
+            { /*answer Field */ }
+            <Row>
+              <Col>
+                <div>
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text>A</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl placeholder="enter the answer" defaultValue={editedAnswer != null ? editedAnswer : ''}
+                      onChange={this.updateAnswerField}
+                    />
+                  </InputGroup>
+                </div>
+              </Col>
+            </Row>
+            { /* hint field*/ }
+            <Row>
+              <Col>
+                <div>
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text>H</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl placeholder="enter a hint (optional)" defaultValue={editedHint != null ? editedHint : ''}
+                      onChange={this.updateHintField}
+                    />
+                  </InputGroup>
+                </div>
+              </Col>
+            </Row>
+            <Row >
+              <Col >
+                <ButtonToolbar id="question-tool-bar" className="d-flex flex-column">
+                  <ButtonGroup >
+                    <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.saveNewQuestion()}>save</Button>
+                    <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.props.deleteQuestion(this.props.index)}>delete</Button>
+                    <Button className="question-tool-bar-button" variant="secondary" size="sm" >{htmlEntities.decode('&#x2304;')}</Button>
+                    <Button className="question-tool-bar-button" variant="secondary" size="sm" >{htmlEntities.decode('&#x2303;')}</Button>
+                  </ButtonGroup>
+                </ButtonToolbar>
+              </Col>
+            </Row>
+          </Col>
         </>   
     )
   }

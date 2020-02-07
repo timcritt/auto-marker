@@ -9,11 +9,14 @@ class Quiz extends React.Component {
   render() {
     return (
       <Container>
+        <Row></Row>
         <Row>
           <button onClick={this.props.loadSampleQuestions}>Load Sample Questions</button>
         </Row>
         <Row>
-          
+          <span>{this.props.questions.title}</span>
+        </Row>
+        <Row>
           <ol type="none">
             {Object.keys(this.props.questions)
               .map(key => 
@@ -22,8 +25,7 @@ class Quiz extends React.Component {
                   index={key}
                   question={this.props.questions[key]}
                   >
-                </Question>
-                
+                </Question>   
               )
             }
           </ol>

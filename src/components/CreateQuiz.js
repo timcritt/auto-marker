@@ -1,15 +1,28 @@
 import React from 'react';
 import QuestionField from './QuestionField'
-import { Container, Row, Col, Button } from 'react-bootstrap';
 
+import { Container, Row, Col, ButtonToolbar, Button, InputGroup, FormControl, ButtonGroup } from 'react-bootstrap';
 class CreateQuiz extends React.Component {
   
   render() {
     return (
       <Container>
-        <row>
-          <Col md={{ span: 6, offset: 3 }}>
-            
+        <Row>
+          <Col id="quiz-container" md={{ span: 6, offset: 3 }}>
+            <Row id="title-field-row" >
+              <Col md={{ span: 6, offset: 3 }} >
+                <div >
+                  <InputGroup >
+                    <InputGroup.Prepend>
+                      <InputGroup.Text>T</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl  placeholder="enter the quiz title" 
+                      onChange={this.updateQuestionField}
+                    />
+                  </InputGroup>
+                </div>
+              </Col>
+            </Row>
               {Object.keys(this.props.questions)
                 .map(key => 
                   <QuestionField 
@@ -26,9 +39,9 @@ class CreateQuiz extends React.Component {
                 )
               }
             
-            <Button block  onClick={(e) => this.props.addQuestion(e)}>+ Add Question</Button>
+            <Button className="add-question-button" block onClick={(e) => this.props.addQuestion(e)}>+ Add Question</Button>
           </Col>
-        </row>
+        </Row>
       </Container>
     )
   }
