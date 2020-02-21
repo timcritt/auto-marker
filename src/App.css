@@ -36,3 +36,41 @@
     transform: rotate(360deg);
   }
 }
+
+body {background-color: #7ca7b8;}
+
+#quiz-container {
+  background-color: #668c9b;
+  padding: 20px;
+  margin-bottom: 50px;
+  margin-top: 75px;
+  box-shadow: 1px 1px 15px 0px rgb(34, 61, 70);
+}
+
+#question-tool-bar {
+  padding-bottom: 10px;
+}
+#title-field-row {
+  padding-bottom: 10px;
+}
+
+.add-question-button {
+  background-color: #73b49f;
+  border-color: #73b49f;
+  transition-duration: 0.4s
+}
+
+.add-question-button:hover {
+  background-color: rgb(77, 196, 77);
+  border-color: #73b49f;
+
+}
+.add-question-button:focus {
+  background-color: rgb(77, 196, 77);
+  border-color: #73b49f;
+
+}
+.question-tool-bar-button {
+  background-color: #b7c3cc;
+}
+

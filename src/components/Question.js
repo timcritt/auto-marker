@@ -1,7 +1,8 @@
 import React from 'react';
 import questionStatus from '../enums';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Html5Entities } from 'html-entities'
+import { saveQuiz } from '../actions/quiz-actions';
+import { connect } from 'react-redux';
 
 class Question extends React.Component {
 
@@ -10,21 +11,20 @@ class Question extends React.Component {
     correctlyAnswered: false,
     answered: false,
     hintVisibilty: 'hidden',
-    hasSeenHint: false
+    hasSeenHint: false,
   }
   render() {
     return (
-      <li>         
-          <div>{this.props.question.question}</div>
-          <div>
-            <input onChange={this.updateUserAnswer}></input>
-            <button onClick={this.checkUserAnswer}>Check</button>
-            <span>{this.renderQuestionStatus()}</span>
-            <button onClick={this.toggleShowHint}>{this.state.hintVisibilty === 'hidden' ? 'show hint' : 'hide hint'}</button>
-            <span style={{visibility: this.state.hintVisibilty}}>{` ${this.props.question.hint ? this.props.question.hint : 'no hint'  }`}</span>
-          </div>
-        
-      </li>
+      <div>   
+        <div>{this.props.questions[this.props.index].question}</div>
+        <div>
+          <input onChange={this.updateUserAnswer}></input>
+          <button onClick={this.checkUserAnswer}>Check</button>
+          <span>{this.renderQuestionStatus()}</span>
+          <button onClick={this.toggleShowHint}>{this.state.hintVisibilty === 'hidden' ? 'show hint' : 'hide hint'}</button>
+          <span style={{visibility: this.state.hintVisibilty}}>{` ${this.props.questions[this.props.index].hint ? this.props.questions[this.props.index].hint : 'no hint'  }`}</span>
+        </div>
+      </div>
     )
   }
   renderQuestionStatus = () => {
@@ -64,4 +64,15 @@ class Question extends React.Component {
   }
 }
 
-export default Question;
+const mapStateToProps = state => ({
+  
+  title: state.title,
+  questions: state.questions
+  
+})
+
+const mapActionsToProps = {
+  onSaveQuiz: saveQuiz
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Question);

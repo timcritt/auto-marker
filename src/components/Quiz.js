@@ -1,16 +1,22 @@
 import React from 'react';
 import Question from './Question';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col } from 'react-bootstrap';
-
+import { Container, Row, Button } from 'react-bootstrap';
+//import  * as QuizActions  from '../actions/quiz-actions';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 
 class Quiz extends React.Component {
   
   render() {
     return (
       <Container>
+        <Row></Row>
         <Row>
-          <button onClick={this.props.loadSampleQuestions}>Load Sample Questions</button>
+          <button onClick={this.handleLoadQuiz}>Load Sample Questions</button>
+        </Row>
+        <Row>
+          <span>{this.props.title}</span>
         </Row>
         <Row>
           <ol type="none">
@@ -21,15 +27,37 @@ class Quiz extends React.Component {
                   index={key}
                   question={this.props.questions[key]}
                   >
-                </Question>
-                
+                </Question>   
               )
             }
           </ol>
         </Row>
+        <Link to='/createQuiz'>
+          <Button>edit quiz</Button>
+        </Link>
       </Container>
     );
   }
+
+  handleLoadQuiz = () => {
+    //put some code here to pick which quiz to load
+    console.log("loading quiz")
+    this.props.loadQuiz();
+  }
 }
 
-export default Quiz;
+const mapStateToProps = state => ({
+  title: state.title,
+  questions: state.questions
+})
+
+const mapActionsToProps = (dispatch) => {
+  return {
+    //rmember to add the action property of the quiz that you want to load
+    loadQuiz: () => dispatch({type: "LOAD_QUIZ"})
+  }
+   
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Quiz);
+
