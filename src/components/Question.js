@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { saveQuiz } from '../actions/quiz-actions';
 import { connect } from 'react-redux';
 
+
 class Question extends React.Component {
 
   state = {
@@ -32,7 +33,7 @@ class Question extends React.Component {
       if(this.state.correctlyAnswered) {
         return <span style={{color: "green"}}> {questionStatus.CORRECT} </span>
       } else {
-        return <span style={{color: "red"}}> {questionStatus.INCORRECT} </span>
+        return <span style={{color: "#ae1e1e"}}> {questionStatus.INCORRECT} </span>
       }
     }
     return <span>{questionStatus.UNANSWERED}</span>

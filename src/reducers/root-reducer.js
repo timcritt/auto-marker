@@ -2,7 +2,7 @@ import sampleQuiz from "../sampleQuiz"
 
 const initState = {
   quizid: 1,
-  title:'quiz title',
+  title:'',
   questions: [
     { 
       id: 'question1',
@@ -83,6 +83,12 @@ const rootReducer = (state = initState, action) => {
       questions: newQuestions
     }
 
+  }
+  if (action.type === 'SAVE_TITLE') {
+    return {
+      ...state,
+      title: action.title
+    }
   }
   
   return state

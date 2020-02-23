@@ -3,7 +3,8 @@ import { Container, Row, Col, ButtonToolbar, Button, InputGroup, FormControl, Bu
 import { Html5Entities } from 'html-entities';
 import { connect } from 'react-redux';
 import { saveQuiz } from '../actions/quiz-actions';
-
+import { IoIosArrowUp, IoIosArrowDown, IoIosSave, IoMdSettings, IoMdTrash, IoIosHelpCircleOutline, IoIosHelpCircle, IoMdKey,  } from 'react-icons/io'
+import { TiLightbulb } from 'react-icons/ti'
 
 //this is needed to get around "dangerous code injection" protection in React. This method is safe. 
 const htmlEntities = new Html5Entities();
@@ -57,6 +58,7 @@ class QuestionField extends React.Component {
   }
   handleShiftQuestionUp = (id) => {
     this.props.shiftQuestionUp(id);
+    
   }
   handleShiftQuestionDown = (id) => {
     this.props.shiftQuestionDown(id);
@@ -80,7 +82,7 @@ class QuestionField extends React.Component {
               <div >
                 <InputGroup >
                   <InputGroup.Prepend>
-                    <InputGroup.Text>Q</InputGroup.Text>
+                    <InputGroup.Text><IoIosHelpCircleOutline className="input-symbol"/></InputGroup.Text>
                   </InputGroup.Prepend>
                   <FormControl placeholder="enter the question" defaultValue={this.state.editedQuestion}
                       onChange={this.handleChangeQuestionField}
@@ -98,7 +100,7 @@ class QuestionField extends React.Component {
               <div>
                 <InputGroup>
                   <InputGroup.Prepend>
-                    <InputGroup.Text>A</InputGroup.Text>
+                    <InputGroup.Text><IoMdKey className="input-symbol"/></InputGroup.Text>
                   </InputGroup.Prepend>
                   <FormControl placeholder="enter the answer" defaultValue={editedAnswer != null ? editedAnswer : ''}
                     onChange={this.updateAnswerField}
@@ -112,8 +114,8 @@ class QuestionField extends React.Component {
             <Col>
               <div>
                 <InputGroup>
-                  <InputGroup.Prepend>
-                    <InputGroup.Text>H</InputGroup.Text>
+                  <InputGroup.Prepend >
+                    <InputGroup.Text><TiLightbulb className="input-symbol" /></InputGroup.Text>
                   </InputGroup.Prepend>
                   <FormControl placeholder="enter a hint (optional)" defaultValue={editedHint != null ? editedHint : ''}
                     onChange={this.updateHintField}
@@ -126,10 +128,10 @@ class QuestionField extends React.Component {
             <Col >
               <ButtonToolbar id="question-tool-bar" className="d-flex flex-column">
                 <ButtonGroup >
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleSaveQuestion(this.props.id)}>save</Button>
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleDeleteQuestion(this.props.id)}>delete</Button>
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleShiftQuestionDown(this.props.id)}>{htmlEntities.decode('&#x2304;')}</Button>
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleShiftQuestionUp(this.props.id)}>{htmlEntities.decode('&#x2303;')}</Button>
+                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleSaveQuestion(this.props.id)}><IoIosSave className='question-toolbar-symbol' /></Button>
+                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleDeleteQuestion(this.props.id)}><IoMdTrash className='question-toolbar-symbol' /></Button>
+                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleShiftQuestionDown(this.props.id)}><IoIosArrowDown className='question-toolbar-symbol' /></Button>
+                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleShiftQuestionUp(this.props.id)}><IoIosArrowUp className='question-toolbar-symbol'/></Button>
                 </ButtonGroup>
               </ButtonToolbar>
             </Col>

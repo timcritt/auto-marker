@@ -1,40 +1,50 @@
 import React from 'react';
 import Question from './Question';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Button } from 'react-bootstrap';
+import { Container, Row, Button, Col } from 'react-bootstrap';
 //import  * as QuizActions  from '../actions/quiz-actions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { TiTick} from 'react-icons/ti'
+
 
 class Quiz extends React.Component {
   
   render() {
     return (
       <Container>
-        <Row></Row>
-        <Row>
-          <button onClick={this.handleLoadQuiz}>Load Sample Questions</button>
+        <Row >
+          <Col id="quiz-container" md={{ span: 6, offset: 3 }}>
+            <Col id="title-field-row">
+              <Row>
+                <button onClick={this.handleLoadQuiz}>Load Sample Questions</button>
+              </Row>
+              <Row>
+                <span>{this.props.title}</span>
+              </Row>
+            </Col>
+            <Col>
+            
+              <ol type="none">
+                {Object.keys(this.props.questions)
+                  .map(key => 
+                    <Question 
+                      key={key}
+                      index={key}
+                      question={this.props.questions[key]}
+                      >
+                    </Question>   
+                  )
+                }
+              </ol>
+            
+            </Col>
+            <Link to='/createQuiz'>
+              <Button>edit quiz</Button>
+            </Link>
+            
+          </Col>
         </Row>
-        <Row>
-          <span>{this.props.title}</span>
-        </Row>
-        <Row>
-          <ol type="none">
-            {Object.keys(this.props.questions)
-              .map(key => 
-                <Question 
-                  key={key}
-                  index={key}
-                  question={this.props.questions[key]}
-                  >
-                </Question>   
-              )
-            }
-          </ol>
-        </Row>
-        <Link to='/createQuiz'>
-          <Button>edit quiz</Button>
-        </Link>
       </Container>
     );
   }

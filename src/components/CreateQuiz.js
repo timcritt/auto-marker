@@ -7,43 +7,43 @@ import { Link } from 'react-router-dom'
 //import { updateAnswer } from '../actions/quiz-actions';
 
 class CreateQuiz extends React.Component {
+
+  state = {
+    editedTitle: this.props.title ? this.props.title : ''
+  }
   updateTitle = (e) => {
     const title = e.currentTarget.value;
-    this.props.updateTitle(title)
+    //reactivate this if choosing to save title prop locally and then save to global state on save
+    // this.setState({
+    //   editedTitle: title
+    // })
+    this.props.saveTitle(title)
   }
   handleAddQuestion = () => {
- 
     const newQuestion = {
       id: `question${Date.now()}`,
       question: '',
       answer: '',
       hint: ''
     }
-    
     this.props.addNewQuestion(newQuestion);
   }
-
+ 
   render() {   
     return (
       <Container>
         <Row>
           <Col id="quiz-container" md={{ span: 6, offset: 3 }}>
-            <Row id="title-field-row" >
-              <Col md={{ span: 6, offset: 3 }} >
-                <div >
-                  <InputGroup >
-                    <InputGroup.Prepend>
-                      <InputGroup.Text>T</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <FormControl  
-                      placeholder="enter a title"
-                      value={this.props.title}
-                      onChange={this.updateTitle}
-                    />
-                  </InputGroup>
-                </div>
-              </Col>
-            </Row>
+            <Col id="title-field-row" >
+              <InputGroup >
+                <FormControl  
+                  className="edit-title-field"
+                  placeholder="enter a title"
+                  defaultValue={this.props.title}
+                  onChange={this.updateTitle}
+                />
+              </InputGroup>
+            </Col>
               {Object.keys(this.props.questions)
                 .map(key => 
                   <QuestionField 
@@ -59,12 +59,16 @@ class CreateQuiz extends React.Component {
                   />
                 )
               }
+            <Col>
             <Button className="add-question-button" block onClick={(e) => this.handleAddQuestion()}>+ Add Question</Button>
+            <Link to='/Quiz'>
+              <Button className='takeQuizButton'>preview quiz</Button>
+            </Link>
+            </Col>
+            
           </Col>
         </Row>
-        <Link to='/Quiz'>
-          <Button>take quiz</Button>
-        </Link>
+        
       </Container>
     )
   }
@@ -77,7 +81,8 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = (dispatch) => {
   return {
-    addNewQuestion: (newQuestion) => { dispatch({ type: 'ADD_NEW_QUESTION', newQuestion: newQuestion})}
+    addNewQuestion: (newQuestion) => { dispatch({ type: 'ADD_NEW_QUESTION', newQuestion: newQuestion})},
+    saveTitle: (title) => {dispatch({type: 'SAVE_TITLE', title: title})}
   }
 }
 
