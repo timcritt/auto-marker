@@ -1,9 +1,9 @@
 import React from 'react';
 import questionStatus from '../enums';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Button} from 'react-bootstrap';
 import { saveQuiz } from '../actions/quiz-actions';
 import { connect } from 'react-redux';
-
+import { TiLightbulb } from 'react-icons/ti'
 
 class Question extends React.Component {
 
@@ -16,16 +16,17 @@ class Question extends React.Component {
   }
   render() {
     return (
-      <div>   
-        <div>{this.props.questions[this.props.index].question}</div>
-        <div>
-          <input onChange={this.updateUserAnswer}></input>
-          <button onClick={this.checkUserAnswer}>Check</button>
+      <React.Fragment>
+        <Row id="question-container">
+          {this.props.questions[this.props.index].question}
+        </Row>
+        <Row className="answer-row">
+          <input className="answer-input" onChange={this.updateUserAnswer}></input>
+          <Button className="check-answer-button" onClick={this.checkUserAnswer}>check</Button>
+          <button onClick={this.toggleShowHint}><TiLightbulb/></button>
           <span>{this.renderQuestionStatus()}</span>
-          <button onClick={this.toggleShowHint}>{this.state.hintVisibilty === 'hidden' ? 'show hint' : 'hide hint'}</button>
-          <span style={{visibility: this.state.hintVisibilty}}>{` ${this.props.questions[this.props.index].hint ? this.props.questions[this.props.index].hint : 'no hint'  }`}</span>
-        </div>
-      </div>
+        </Row>
+      </React.Fragment>
     )
   }
   renderQuestionStatus = () => {

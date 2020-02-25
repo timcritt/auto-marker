@@ -39,9 +39,16 @@
 
 body {background-color: #7ca7b8;}
 
-#quiz-container {
+#edit-quiz-container {
   background-color: #70949b;
   padding: 20px;
+  margin-bottom: 50px;
+  margin-top: 75px;
+  box-shadow: 1px 1px 15px 0px rgb(34, 61, 70);
+}
+#take-quiz-container {
+  background-color: #70949b;
+  padding: 40px;
   margin-bottom: 50px;
   margin-top: 75px;
   box-shadow: 1px 1px 15px 0px rgb(34, 61, 70);
@@ -65,6 +72,7 @@ body {background-color: #7ca7b8;}
   color: #979499;
 }
 
+
 .add-question-button {
   background-color: #73b49f;
   border-color: #73b49f;
@@ -86,15 +94,46 @@ body {background-color: #7ca7b8;}
 }
 .question-tool-bar-button:hover {
   background-color:#7f9db9;
+    
 }
 .question-tool-bar-button:focus {
   background-color:#7089a1;
 }
 
-
 .question-toolbar-symbol {
   color: #ffffff;
 }
+#title-container {
+  padding: 10px;
+  padding-left: 0px;
+  text-align: center;
+  color: white;
+  background-color: transparent;
+  margin-bottom: 10px;
+  font-size: x-large;
+  
+}
+#question-container {
+  background-color: transparent;
+  color: white;
+  padding: 0px, 0px, 0px, 0px;
+  
+}
+.edit-quiz-button {
+  margin-top: 10px;
+}
 
-
-
+.answer-input {
+  background-color: #5d7a80;
+  border: none;
+  color: white;
+  padding: 5px;
+}
+.check-answer-button {
+  background-color: #88a7c4;;
+  border: none;
+}
+.answer-row {
+  margin-bottom: 10px;
+  
+}

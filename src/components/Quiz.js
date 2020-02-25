@@ -5,7 +5,7 @@ import { Container, Row, Button, Col } from 'react-bootstrap';
 //import  * as QuizActions  from '../actions/quiz-actions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { TiTick} from 'react-icons/ti'
+
 
 
 class Quiz extends React.Component {
@@ -13,38 +13,37 @@ class Quiz extends React.Component {
   render() {
     return (
       <Container>
-        <Row >
-          <Col id="quiz-container" md={{ span: 6, offset: 3 }}>
-            <Col id="title-field-row">
+          <Col id="take-quiz-container" md={{ span: 6, offset: 3 }}>
+            <Col >
               <Row>
-                <button onClick={this.handleLoadQuiz}>Load Sample Questions</button>
-              </Row>
-              <Row>
-                <span>{this.props.title}</span>
+                
+                  <div id="title-container">
+                   {this.props.title}
+                  </div>
+                
               </Row>
             </Col>
             <Col>
-            
-              <ol type="none">
-                {Object.keys(this.props.questions)
-                  .map(key => 
-                    <Question 
-                      key={key}
-                      index={key}
-                      question={this.props.questions[key]}
-                      >
-                    </Question>   
-                  )
-                }
-              </ol>
-            
+              {Object.keys(this.props.questions)
+                .map(key => 
+                  <Question 
+                    key={key}
+                    index={key}
+                    question={this.props.questions[key]}
+                    >
+                  </Question>   
+                )
+              }
+              <Row>
+              <Link to='/createQuiz'>
+                <Button className="edit-quiz-button">edit quiz</Button>
+              </Link>
+            </Row>
             </Col>
-            <Link to='/createQuiz'>
-              <Button>edit quiz</Button>
-            </Link>
+            
             
           </Col>
-        </Row>
+        
       </Container>
     );
   }

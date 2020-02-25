@@ -4,7 +4,7 @@ import { Html5Entities } from 'html-entities';
 import { connect } from 'react-redux';
 import { saveQuiz } from '../actions/quiz-actions';
 import { IoIosArrowUp, IoIosArrowDown, IoIosSave, IoMdSettings, IoMdTrash, IoIosHelpCircleOutline, IoIosHelpCircle, IoMdKey,  } from 'react-icons/io'
-import { TiLightbulb } from 'react-icons/ti'
+import { TiLightbulb, TiDeleteOutline, TiTimes, TiPen } from 'react-icons/ti'
 
 //this is needed to get around "dangerous code injection" protection in React. This method is safe. 
 const htmlEntities = new Html5Entities();
@@ -68,6 +68,12 @@ class QuestionField extends React.Component {
   handleDeleteQuestion = (id) => {
     this.props.deleteQuestion(id);
   }
+
+  handleLoadQuiz = () => {
+    //put some code here to pick which quiz to load
+    console.log("loading quiz")
+    this.props.loadQuiz();
+  }
  
   render() {
 
@@ -85,17 +91,17 @@ class QuestionField extends React.Component {
                     <InputGroup.Text><IoIosHelpCircleOutline className="input-symbol"/></InputGroup.Text>
                   </InputGroup.Prepend>
                   <FormControl placeholder="enter the question" defaultValue={this.state.editedQuestion}
-                      onChange={this.handleChangeQuestionField}
-                      //defaultValue is only for initial render. Changing state won't trigger render 
-                      //form field will only rerender when this key is changed. A bit
-                      key={this.props.id}
+                    onChange={this.handleChangeQuestionField}
+                    //defaultValue is only for initial render. Changing state won't trigger render 
+                    //form field will only rerender when this key is changed. A bit
+                    key={this.props.id}
                   />
                 </InputGroup>
               </div>
             </Col>
           </Row>
           { /*answer Field */ }
-          <Row>
+          <Row >
             <Col>
               <div>
                 <InputGroup>
@@ -129,7 +135,7 @@ class QuestionField extends React.Component {
               <ButtonToolbar id="question-tool-bar" className="d-flex flex-column">
                 <ButtonGroup >
                   <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleSaveQuestion(this.props.id)}><IoIosSave className='question-toolbar-symbol' /></Button>
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleDeleteQuestion(this.props.id)}><IoMdTrash className='question-toolbar-symbol' /></Button>
+                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleDeleteQuestion(this.props.id)}><TiTimes className='question-toolbar-symbol' /></Button>
                   <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleShiftQuestionDown(this.props.id)}><IoIosArrowDown className='question-toolbar-symbol' /></Button>
                   <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleShiftQuestionUp(this.props.id)}><IoIosArrowUp className='question-toolbar-symbol'/></Button>
                 </ButtonGroup>
@@ -156,7 +162,7 @@ const mapDispatchToProps = (dispatch) => {
     deleteQuestion: (id) => { dispatch({type: 'DELETE_QUESTION', id: id})},
     saveQuestions: (questions) => { dispatch({type: 'SAVE_QUESTIONS', questions: questions})},
     shiftQuestionUp: (id) => { dispatch({type: 'SHIFT_QUESTION_UP', id: id})},
-    shiftQuestionDown: (id) => { dispatch({type: 'SHIFT_QUESTION_DOWN', id: id})}
+    shiftQuestionDown: (id) => { dispatch({type: 'SHIFT_QUESTION_DOWN', id: id})},
   }
 }
 

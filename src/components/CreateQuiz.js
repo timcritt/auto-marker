@@ -32,43 +32,41 @@ class CreateQuiz extends React.Component {
   render() {   
     return (
       <Container>
-        <Row>
-          <Col id="quiz-container" md={{ span: 6, offset: 3 }}>
-            <Col id="title-field-row" >
-              <InputGroup >
-                <FormControl  
-                  className="edit-title-field"
-                  placeholder="enter a title"
-                  defaultValue={this.props.title}
-                  onChange={this.updateTitle}
-                />
-              </InputGroup>
-            </Col>
-              {Object.keys(this.props.questions)
-                .map(key => 
-                  <QuestionField 
-                    key={this.props.questions[key].id}
-                    id={this.props.questions[key].id}
-                    question={this.props.questions[key]}
-                    updateQuestion={this.props.updateQuestion}
-                    updateAnswer={this.props.updateAnswer}
-                    addQuestion={this.props.addQuestion}
-                    deleteQuestion={this.props.deleteQuestion}
-                    addHint={this.props.addHint}
-                    updateHint={this.props.updateHint}
-                  />
-                )
-              }
-            <Col>
+        <Col id="edit-quiz-container" md={{ span: 6, offset: 3 }}>
+          <Col id="title-field-row" >
+            <InputGroup >
+              <FormControl  
+                className="edit-title-field"
+                placeholder="enter a title"
+                defaultValue={this.props.title}
+                onChange={this.updateTitle}
+              />
+            </InputGroup>
+          </Col>
+          {Object.keys(this.props.questions)
+            .map(key => 
+              <QuestionField 
+                key={this.props.questions[key].id}
+                id={this.props.questions[key].id}
+                question={this.props.questions[key]}
+                updateQuestion={this.props.updateQuestion}
+                updateAnswer={this.props.updateAnswer}
+                addQuestion={this.props.addQuestion}
+                deleteQuestion={this.props.deleteQuestion}
+                addHint={this.props.addHint}
+                updateHint={this.props.updateHint}
+              />
+            )
+          }
+          <Col>
             <Button className="add-question-button" block onClick={(e) => this.handleAddQuestion()}>+ Add Question</Button>
             <Link to='/Quiz'>
               <Button className='takeQuizButton'>preview quiz</Button>
             </Link>
-            </Col>
-            
+            <Button onClick={this.props.loadQuiz} className='takeQuizButton'>load quiz</Button>
           </Col>
-        </Row>
-        
+          
+        </Col>
       </Container>
     )
   }
@@ -82,7 +80,8 @@ const mapStateToProps = state => ({
 const mapActionsToProps = (dispatch) => {
   return {
     addNewQuestion: (newQuestion) => { dispatch({ type: 'ADD_NEW_QUESTION', newQuestion: newQuestion})},
-    saveTitle: (title) => {dispatch({type: 'SAVE_TITLE', title: title})}
+    saveTitle: (title) => {dispatch({type: 'SAVE_TITLE', title: title})},
+    loadQuiz: () => dispatch({type: "LOAD_QUIZ"})
   }
 }
 
