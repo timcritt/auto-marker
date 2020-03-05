@@ -5,17 +5,17 @@ const htmlEntities = new Html5Entities();
 
 const sampleQuiz = {
   quizid: 1,
-  title:'quiz title',
+  title:'My Quiz',
   questions: [
     {
       id: 'question3',
-      question: "sample quiz question 1 ",
+      question: "Sample quiz question 1 ",
       answer: "sample quiz answer 1",
       hint: ''
     },
     {
       id: 'question4',
-      question: "sample quiz question 2 ",
+      question: "Sample quiz question 2 ",
       answer: "sample quiz answer 2",
       hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
     }

@@ -46,6 +46,7 @@ class CreateQuiz extends React.Component {
           {Object.keys(this.props.questions)
             .map(key => 
               <QuestionField 
+                index={this.key}
                 key={this.props.questions[key].id}
                 id={this.props.questions[key].id}
                 question={this.props.questions[key]}
@@ -58,12 +59,16 @@ class CreateQuiz extends React.Component {
               />
             )
           }
-          <Col>
+          <Col >
             <Button className="add-question-button" block onClick={(e) => this.handleAddQuestion()}>+ Add Question</Button>
-            <Link to='/Quiz'>
-              <Button className='takeQuizButton'>preview quiz</Button>
-            </Link>
-            <Button onClick={this.props.loadQuiz} className='takeQuizButton'>load quiz</Button>
+            
+            <div id="edit-question-toolbar">
+              <Link to='/Quiz'>
+                <Button className='takeQuizButton'>preview quiz</Button>
+              </Link>
+              <Button onClick={this.props.loadQuiz} className='takeQuizButton'>load quiz</Button>
+            </div>
+            
           </Col>
           
         </Col>

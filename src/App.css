@@ -40,18 +40,19 @@
 body {background-color: #7ca7b8;}
 
 #edit-quiz-container {
-  background-color: #70949b;
+  background-color: #ffffff;
   padding: 20px;
   margin-bottom: 50px;
   margin-top: 75px;
   box-shadow: 1px 1px 15px 0px rgb(34, 61, 70);
 }
 #take-quiz-container {
-  background-color: #70949b;
+  background-color: white;
   padding: 40px;
   margin-bottom: 50px;
   margin-top: 75px;
   box-shadow: 1px 1px 15px 0px rgb(34, 61, 70);
+
 }
 
 .takeQuizButton {
@@ -90,11 +91,12 @@ body {background-color: #7ca7b8;}
   border-color: #73b49f;
 }
 .question-tool-bar-button {
-  background-color: #88a7c4;
+  background-color: #c6d7e7;
+  border-color: #aebac4;
 }
 .question-tool-bar-button:hover {
   background-color:#7f9db9;
-    
+  border-color: #aebac4;
 }
 .question-tool-bar-button:focus {
   background-color:#7089a1;
@@ -104,18 +106,19 @@ body {background-color: #7ca7b8;}
   color: #ffffff;
 }
 #title-container {
+  display: flex;
+  justify-content: center;
   padding: 10px;
   padding-left: 0px;
   text-align: center;
-  color: white;
+  color: black;
   background-color: transparent;
-  margin-bottom: 10px;
   font-size: x-large;
   
 }
 #question-container {
   background-color: transparent;
-  color: white;
+  color: black;
   padding: 0px, 0px, 0px, 0px;
   
 }
@@ -124,10 +127,11 @@ body {background-color: #7ca7b8;}
 }
 
 .answer-input {
-  background-color: #5d7a80;
-  border: none;
-  color: white;
-  padding: 5px;
+  background-color: white;
+  
+  color: black;
+  
+  margin: 0px;
 }
 .check-answer-button {
   background-color: #88a7c4;;
@@ -135,5 +139,28 @@ body {background-color: #7ca7b8;}
 }
 .answer-row {
   margin-bottom: 10px;
-  
 }
+.align-right {
+  display: flex;
+  justify-content: flex-end;
+}
+.correct-answer {
+  background-color: red;
+}
+.question-take-quiz {
+  border: none;
+}
+.quiz-question-container {
+  padding-bottom: 10px;
+}
+.quiz-answer-container {
+  padding-bottom: 4px;
+}
+.button-column {
+  padding-left: 0px;
+}
+#edit-question-toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+

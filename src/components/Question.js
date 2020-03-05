@@ -1,9 +1,10 @@
 import React from 'react';
 import questionStatus from '../enums';
-import { Container, Row, Button} from 'react-bootstrap';
+import { Container, Col, Row, Button, InputGroup, FormControl} from 'react-bootstrap';
 import { saveQuiz } from '../actions/quiz-actions';
 import { connect } from 'react-redux';
-import { TiLightbulb } from 'react-icons/ti'
+import { TiLightbulb } from 'react-icons/ti';
+
 
 class Question extends React.Component {
 
@@ -13,18 +14,29 @@ class Question extends React.Component {
     answered: false,
     hintVisibilty: 'hidden',
     hasSeenHint: false,
+    
   }
   render() {
+
+    const questionNumber = `${(parseInt(this.props.index) + 1).toString()}. `;
+
     return (
       <React.Fragment>
-        <Row id="question-container">
-          {this.props.questions[this.props.index].question}
-        </Row>
-        <Row className="answer-row">
-          <input className="answer-input" onChange={this.updateUserAnswer}></input>
-          <Button className="check-answer-button" onClick={this.checkUserAnswer}>check</Button>
-          <button onClick={this.toggleShowHint}><TiLightbulb/></button>
-          <span>{this.renderQuestionStatus()}</span>
+        <InputGroup >
+        <div>
+          <p>{questionNumber}{this.props.questions[this.props.index].question}</p>
+        </div>
+        
+        </InputGroup>
+        <Row >
+          <Col className="quiz-question-container"  >
+            <InputGroup>
+              <FormControl id="enter-answer-field" className="answer-input" onChange={this.updateUserAnswer}
+                key={this.props.id}
+              />
+                <Button className="check-answer-button" onClick={this.checkUserAnswer}>check</Button>
+            </InputGroup>
+          </Col>
         </Row>
       </React.Fragment>
     )

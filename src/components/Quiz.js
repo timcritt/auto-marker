@@ -13,41 +13,38 @@ class Quiz extends React.Component {
   render() {
     return (
       <Container>
-          <Col id="take-quiz-container" md={{ span: 6, offset: 3 }}>
-            <Col >
-              <Row>
-                
-                  <div id="title-container">
-                   {this.props.title}
-                  </div>
-                
-              </Row>
-            </Col>
-            <Col>
-              {Object.keys(this.props.questions)
-                .map(key => 
-                  <Question 
-                    key={key}
-                    index={key}
-                    question={this.props.questions[key]}
-                    >
-                  </Question>   
-                )
-              }
-              <Row>
-              <Link to='/createQuiz'>
-                <Button className="edit-quiz-button">edit quiz</Button>
-              </Link>
+        <Col id="take-quiz-container" md={{ span: 6, offset: 3 }}>
+          <Col >
+            <Row id="title-container">
+              <div id="title-container">
+                {this.props.title}
+              </div>
             </Row>
-            </Col>
-            
-            
           </Col>
-        
+          <Col>
+            {Object.keys(this.props.questions)
+              .map(key => 
+                <Question 
+                  key={key}
+                  index={key}
+                  question={this.props.questions[key]}
+                  >
+                </Question>   
+              )
+            }
+            <Row>
+              <Col>
+                
+                <Link to='/createQuiz'>
+                  <Button className="edit-quiz-button">edit quiz</Button>
+                </Link>
+              </Col>
+            </Row>
+          </Col>
+        </Col>
       </Container>
     );
   }
-
   handleLoadQuiz = () => {
     //put some code here to pick which quiz to load
     console.log("loading quiz")
