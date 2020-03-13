@@ -6,8 +6,8 @@ class Navigation extends React.Component {
 
   render() {
     return (
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand href="#home">Auto-Marker</Navbar.Brand>
+      <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Link className="navbar-brand" to="/"><span className="logo-auto-navigation">Auto</span><span className="logo-marker">Marker</span></Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">

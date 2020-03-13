@@ -21,7 +21,7 @@ class Quiz extends React.Component {
               </div>
             </Row>
           </Col>
-          <Col>
+          <Col className="fixed-container">
             {Object.keys(this.props.questions)
               .map(key => 
                 <Question 
@@ -35,9 +35,7 @@ class Quiz extends React.Component {
             <Row>
               <Col>
                 <div id="edit-question-toolbar">
-                  <Link to='/createQuiz'>
-                    <Button className="edit-quiz-button">edit quiz</Button>
-                  </Link>
+                 
                   
                 </div>
               </Col>

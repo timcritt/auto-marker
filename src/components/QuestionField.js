@@ -4,7 +4,7 @@ import { Html5Entities } from 'html-entities';
 import { connect } from 'react-redux';
 import { saveQuiz } from '../actions/quiz-actions';
 import { IoIosArrowUp, IoIosArrowDown, IoIosSave, IoMdSettings, IoMdTrash, IoIosHelpCircleOutline, IoIosHelpCircle, IoMdKey,  } from 'react-icons/io'
-import { TiLightbulb, TiDeleteOutline, TiTimes, TiPen } from 'react-icons/ti'
+import { TiLightbulb, TiTick, TiDeleteOutline, TiTimes, TiPen } from 'react-icons/ti'
 
 //this is needed to get around "dangerous code injection" protection in React. This method is safe. 
 const htmlEntities = new Html5Entities();

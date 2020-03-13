@@ -9,14 +9,14 @@ class LoadQuiz extends React.Component {
   render () {
     return (
       <Container>
+        <Col id="title-field-row" >
+          <Row id="title-container">
+            <div id="title-container">
+              My Quizzes
+            </div>
+          </Row>
+        </Col>
         <Col id="edit-quiz-container" md={{ span: 6, offset: 3 }}>
-          <Col id="title-field-row" >
-            <Row id="title-container">
-              <div id="title-container">
-                My Quizzes
-              </div>
-            </Row>
-          </Col>
           <Col className="quiz-list-container">
             {sampleQuizes.map( quiz => {
               return (

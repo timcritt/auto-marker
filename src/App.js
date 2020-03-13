@@ -7,6 +7,7 @@ import Navigation from './components/Navigation';
 import './App.css';
 import * as sampleQuizes from './sampleQuiz'
 import LoadQuiz from './components/LoadQuiz';
+import Landing from './components/Landing';
 
 class App extends React.Component {
   
@@ -21,14 +22,14 @@ class App extends React.Component {
       <React.Fragment>
       
       <BrowserRouter>
-      <Navigation/>
-        <Switch>
-          <Route path='/quiz' exact component={Quiz} />
-          <Route path='/createQuiz' exact component={CreateQuiz} loadSampleQuestions={this.loadSampleQuestions}/>
-          <Route path='/loadQuiz' exact component={LoadQuiz}/>
-          <Route path='/' render={ () => <div>404</div>} />
-        </Switch>
-      </BrowserRouter>
+        <Navigation/>
+          <Switch>
+            <Route path='/quiz' exact component={Quiz} />
+            <Route path='/createQuiz' exact component={CreateQuiz} loadSampleQuestions={this.loadSampleQuestions}/>
+            <Route path='/loadQuiz' exact component={LoadQuiz}/>
+            <Route path='/' exact component={Landing} />
+          </Switch>
+        </BrowserRouter>
       </React.Fragment>
     )
   }
