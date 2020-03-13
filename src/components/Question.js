@@ -3,7 +3,7 @@ import questionStatus from '../enums';
 import { Container, Col, Row, Button, InputGroup, FormControl} from 'react-bootstrap';
 import { saveQuiz } from '../actions/quiz-actions';
 import { connect } from 'react-redux';
-import { TiLightbulb } from 'react-icons/ti';
+import { TiTick, TiTimes} from 'react-icons/ti'
 
 
 class Question extends React.Component {
@@ -14,30 +14,29 @@ class Question extends React.Component {
     answered: false,
     hintVisibilty: 'hidden',
     hasSeenHint: false,
-    
+    answerInputClassName: 'answer-input',
+    isDisabled: false,
+    checkButtonContent: 'check',
+    checkButtonClassName: 'check-answer-button'
   }
-  render() {
+  render() { 
 
-    const questionNumber = `${(parseInt(this.props.index) + 1).toString()}. `;
+    const questionNumber = `${(parseInt(this.props.index) + 1).toString()}`;
 
     return (
       <React.Fragment>
-        <InputGroup >
-        <div>
-          <p>{questionNumber}{this.props.questions[this.props.index].question}</p>
-        </div>
-        
+        <div className="question-container">
+        <div className="question-text-container">{this.props.questions[this.props.index].question}</div>
+        <InputGroup id="enter-answer-field" >
+          <InputGroup.Prepend>
+            <InputGroup.Text  id="prepend">{questionNumber}</InputGroup.Text>
+          </InputGroup.Prepend>
+          <FormControl  className={this.state.answerInputClassName} onChange={this.updateUserAnswer}
+            key={this.props.id} disabled={this.state.isDisabled}
+          />
+          <Button className={this.state.checkButtonClassName} onClick={this.checkUserAnswer} disabled={this.state.isDisabled}>{this.state.checkButtonContent}</Button>
         </InputGroup>
-        <Row >
-          <Col className="quiz-question-container"  >
-            <InputGroup>
-              <FormControl id="enter-answer-field" className="answer-input" onChange={this.updateUserAnswer}
-                key={this.props.id}
-              />
-                <Button className="check-answer-button" onClick={this.checkUserAnswer}>check</Button>
-            </InputGroup>
-          </Col>
-        </Row>
+        </div>
       </React.Fragment>
     )
   }
@@ -60,19 +59,28 @@ class Question extends React.Component {
   updateUserAnswer = (e) => {
     var userAnswer = e.currentTarget.value;
     this.setState({
-      userAnswer
+      userAnswer,
+      checkButtonContent: 'check',
     });
   }
   checkUserAnswer = () => {
-    if (this.props.question.answer.toLowerCase() === this.state.userAnswer.toLowerCase()) {
+    if (this.props.question.answer.toLowerCase().trim() === this.state.userAnswer.toLowerCase().trim()) {
+      console.log("question correct");
       this.setState({
         correctlyAnswered: true,
-        answered: true
+        answered: true,
+        answerInputClassName: 'correctly-answered',
+        isDisabled: true,
+        checkButtonContent: <TiTick/>,
+        checkButtonClassName: 'check-button-correct'
       })
     } else {
       this.setState({
         correctlyAnswered: false,
-        answered: true
+        answered: true,
+        answerInputClassName: 'incorrectly-answered',
+        
+        
       })
     }
   }

@@ -46,7 +46,7 @@ class CreateQuiz extends React.Component {
           {Object.keys(this.props.questions)
             .map(key => 
               <QuestionField 
-                index={this.key}
+                index={key}
                 key={this.props.questions[key].id}
                 id={this.props.questions[key].id}
                 question={this.props.questions[key]}
@@ -66,7 +66,6 @@ class CreateQuiz extends React.Component {
               <Link to='/Quiz'>
                 <Button className='takeQuizButton'>preview quiz</Button>
               </Link>
-              <Button onClick={this.props.loadQuiz} className='takeQuizButton'>load quiz</Button>
             </div>
             
           </Col>
@@ -86,7 +85,8 @@ const mapActionsToProps = (dispatch) => {
   return {
     addNewQuestion: (newQuestion) => { dispatch({ type: 'ADD_NEW_QUESTION', newQuestion: newQuestion})},
     saveTitle: (title) => {dispatch({type: 'SAVE_TITLE', title: title})},
-    loadQuiz: () => dispatch({type: "LOAD_QUIZ"})
+    loadQuiz: () => dispatch({type: "LOAD_QUIZ"}),
+    
   }
 }
 

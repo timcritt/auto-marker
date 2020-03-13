@@ -3,27 +3,33 @@ import Quiz from './components/Quiz';
 import CreateQuiz from './components/CreateQuiz';
 import { connect } from 'react-redux';
 import {Switch, BrowserRouter, Route} from 'react-router-dom'
-
+import Navigation from './components/Navigation';
 import './App.css';
-import sampleQuiz from './sampleQuiz'
+import * as sampleQuizes from './sampleQuiz'
+import LoadQuiz from './components/LoadQuiz';
 
 class App extends React.Component {
   
   loadSampleQuestions = () => {
-  console.log(sampleQuiz)
-  this.props.onUpdateQuiz(sampleQuiz)
+  console.log(sampleQuizes)
+  this.props.onUpdateQuiz(sampleQuizes)
   }
 
   render() {
-    console.log(sampleQuiz)
+    
     return (
+      <React.Fragment>
+      
       <BrowserRouter>
+      <Navigation/>
         <Switch>
           <Route path='/quiz' exact component={Quiz} />
           <Route path='/createQuiz' exact component={CreateQuiz} loadSampleQuestions={this.loadSampleQuestions}/>
+          <Route path='/loadQuiz' exact component={LoadQuiz}/>
           <Route path='/' render={ () => <div>404</div>} />
         </Switch>
       </BrowserRouter>
+      </React.Fragment>
     )
   }
 

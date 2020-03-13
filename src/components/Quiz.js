@@ -34,10 +34,12 @@ class Quiz extends React.Component {
             }
             <Row>
               <Col>
-                
-                <Link to='/createQuiz'>
-                  <Button className="edit-quiz-button">edit quiz</Button>
-                </Link>
+                <div id="edit-question-toolbar">
+                  <Link to='/createQuiz'>
+                    <Button className="edit-quiz-button">edit quiz</Button>
+                  </Link>
+                  
+                </div>
               </Col>
             </Row>
           </Col>
@@ -58,8 +60,9 @@ const mapStateToProps = state => ({
 })
 
 const mapActionsToProps = (dispatch) => {
+  console.log("loading quix")
   return {
-    //rmember to add the action property of the quiz that you want to load
+    
     loadQuiz: () => dispatch({type: "LOAD_QUIZ"})
   }
    

@@ -77,6 +77,7 @@ class QuestionField extends React.Component {
  
   render() {
 
+    const questionNumber = `${(parseInt(this.props.index) + 1).toString()}`;
     const editedAnswer = this.state.editedAnswer;
     const editedHint = this.state.editedHint
     return (
@@ -85,10 +86,10 @@ class QuestionField extends React.Component {
         <Col id="question-card-container">
           <Row >
             <Col>
-              <div >
-                <InputGroup >
-                  <InputGroup.Prepend>
-                    <InputGroup.Text><IoIosHelpCircleOutline className="input-symbol"/></InputGroup.Text>
+              <div>
+                <InputGroup id="enter-answer-field">
+                  <InputGroup.Prepend >
+                    <InputGroup.Text id="prepend-edit-answer-field">{questionNumber}</InputGroup.Text>
                   </InputGroup.Prepend>
                   <FormControl placeholder="enter the question" defaultValue={this.state.editedQuestion}
                     onChange={this.handleChangeQuestionField}
@@ -158,7 +159,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveQuiz: (quiz) => { dispatch({type: 'SAVE_QUIZ', quiz: quiz})},
+    
     deleteQuestion: (id) => { dispatch({type: 'DELETE_QUESTION', id: id})},
     saveQuestions: (questions) => { dispatch({type: 'SAVE_QUESTIONS', questions: questions})},
     shiftQuestionUp: (id) => { dispatch({type: 'SHIFT_QUESTION_UP', id: id})},

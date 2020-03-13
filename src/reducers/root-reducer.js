@@ -1,4 +1,4 @@
-import sampleQuiz from "../sampleQuiz"
+import sampleQuizes from "../sampleQuiz"
 
 const initState = {
   quizid: 1,
@@ -6,13 +6,13 @@ const initState = {
   questions: [
     { 
       id: 'question1',
-      question: "init state question 1? ",
+      question: "",
       answer: "Fluffy",
       hint: 'init hint 1'
     },
     {
       id: 'question2',
-      question: "init state question 2 ",
+      question: "",
       answer: "init state answer 2",
       hint: 'init hint 2'
     }
@@ -32,7 +32,8 @@ const rootReducer = (state = initState, action) => {
     }
   }
   if (action.type === 'LOAD_QUIZ') {
-    return sampleQuiz
+  
+    return sampleQuizes.find( quiz => quiz.quizid === action.key);
   }
 
   if (action.type === 'SAVE_QUESTIONS') {
