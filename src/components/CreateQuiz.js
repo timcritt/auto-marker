@@ -32,17 +32,19 @@ class CreateQuiz extends React.Component {
   render() {   
     return (
       <Container >
-        <Col className="fixed-container" id="edit-quiz-container" md={{ span: 6, offset: 3 }}>
-          <Col id="title-field-row" >
-            <InputGroup >
-              <FormControl  
-                className="edit-title-field"
-                placeholder="enter a title"
-                defaultValue={this.props.title}
-                onChange={this.updateTitle}
-              />
-            </InputGroup>
-          </Col>
+        <Col id="edit-quiz-container" md={{ span: 6, offset: 3 }}>
+        <Col id="title-field-row" >
+          <InputGroup >
+            <FormControl  
+              className="edit-title-field"
+              placeholder="enter a title"
+              defaultValue={this.props.title}
+              onChange={this.updateTitle}
+            />
+          </InputGroup>
+        </Col>
+        <Col className="fixed-container" >
+       
           {Object.keys(this.props.questions)
             .map(key => 
               <QuestionField 
@@ -67,6 +69,7 @@ class CreateQuiz extends React.Component {
               </Link>
             </div>
           </Col>
+        </Col>
         </Col>
       </Container>
     )

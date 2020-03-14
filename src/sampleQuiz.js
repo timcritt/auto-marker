@@ -44,34 +44,10 @@ const sampleQuiz3 = {
   title:'My sample Quiz 3',
   questions: [
     {
-      id: 'question3',
+      id: 'question7',
       question: "",
       answer: "sample quiz 3 answer 1",
       hint: ''
-    },
-    {
-      id: 'question4',
-      question: "",
-      answer: "sample quiz 3 answer 2",
-      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
-    },
-    {
-      id: 'question5',
-      question: "",
-      answer: "sample quiz 3 answer 2",
-      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
-    },
-    {
-      id: 'question6',
-      question: "",
-      answer: "sample quiz 3 answer 2",
-      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
-    },
-    {
-      id: 'question7',
-      question: "",
-      answer: "sample quiz 3 answer 2",
-      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
     },
     {
       id: 'question8',
@@ -88,7 +64,7 @@ const sampleQuiz3 = {
     {
       id: 'question10',
       question: "",
-      answer: "",
+      answer: "sample quiz 3 answer 2",
       hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
     },
     {
@@ -102,12 +78,72 @@ const sampleQuiz3 = {
       question: "",
       answer: "sample quiz 3 answer 2",
       hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
+    },
+    {
+      id: 'question13',
+      question: "",
+      answer: "sample quiz 3 answer 2",
+      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
+    },
+    {
+      id: 'question14',
+      question: "",
+      answer: "",
+      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
+    },
+    {
+      id: 'question15',
+      question: "",
+      answer: "sample quiz 3 answer 2",
+      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
+    },
+    {
+      id: 'question16',
+      question: "",
+      answer: "sample quiz 3 answer 2",
+      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
+    }
+  ]
+}
+const sampleQuiz4 = {
+  quizid: 4,
+  title:'My sample quiz 2',
+  questions: [
+    {
+      id: 'question17',
+      question: "Sample quiz 2 question 1 ",
+      answer: "sample quiz 2 answer 1",
+      hint: ''
+    },
+    {
+      id: 'question18',
+      question: "Sample quiz 2 question 2 ",
+      answer: "sample quiz 2 answer 2",
+      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
+    }
+  ]
+}
+const sampleQuiz5 = {
+  quizid: 5,
+  title:'My sample quiz 2',
+  questions: [
+    {
+      id: 'question19',
+      question: "Sample quiz 2 question 1 ",
+      answer: "sample quiz 2 answer 1",
+      hint: ''
+    },
+    {
+      id: 'question20',
+      question: "Sample quiz 2 question 2 ",
+      answer: "sample quiz 2 answer 2",
+      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
     }
   ]
 }
 
 
-const sampleQuizes = [sampleQuiz1, sampleQuiz2, sampleQuiz3];
+const sampleQuizes = [sampleQuiz1, sampleQuiz2, sampleQuiz3, sampleQuiz4, sampleQuiz5];
 
 // const sampleQuiz= {
 //   user: 'sample user',
