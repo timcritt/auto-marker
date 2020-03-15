@@ -5,17 +5,11 @@ const initState = {
   title:'',
   questions: [
     { 
-      id: 'question1',
-      question: "",
-      answer: "Fluffy",
-      hint: 'init hint 1'
+      id: 'default',
+      question: "question falied to load",
+      answer: "",
+      hint: ''
     },
-    {
-      id: 'question2',
-      question: "",
-      answer: "init state answer 2",
-      hint: 'init hint 2'
-    }
   ]
 }
 
@@ -91,6 +85,24 @@ const rootReducer = (state = initState, action) => {
       title: action.title
     }
   }
+  if (action.type === 'NEW_QUIZ') {
+    console.log("new quiz created")
+    return {
+      ...state,
+      quizid: 99,
+      title:'',
+      questions: [
+        {
+          id: 'question99',
+          question: "",
+          answer: "",
+          hint: ''
+        }
+      ]  
+    }
+    
+  }
+  
   
   return state
 }

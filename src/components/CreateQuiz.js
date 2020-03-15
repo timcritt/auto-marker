@@ -31,8 +31,8 @@ class CreateQuiz extends React.Component {
  
   render() {   
     return (
-      <Container >
-        <Col id="edit-quiz-container" md={{ span: 6, offset: 3 }}>
+      <React.Fragment>
+        
         <Col id="title-field-row" >
           <InputGroup >
             <FormControl  
@@ -43,7 +43,7 @@ class CreateQuiz extends React.Component {
             />
           </InputGroup>
         </Col>
-        <Col className="fixed-container" >
+        <Col className="fixed-container create-container" >
        
           {Object.keys(this.props.questions)
             .map(key => 
@@ -61,17 +61,11 @@ class CreateQuiz extends React.Component {
               />
             )
           }
-          <Col >
-            <Button className="add-question-button" block onClick={(e) => this.handleAddQuestion()}>+ Add Question</Button>
-            <div id="edit-question-toolbar">
-              <Link to='/Quiz'>
-                <Button className='takeQuizButton'>preview quiz</Button>
-              </Link>
-            </div>
-          </Col>
         </Col>
+        <Col className="add-question-button-container">
+          <Button className="add-question-button" block onClick={(e) => this.handleAddQuestion()}>+ Add Question</Button>
         </Col>
-      </Container>
+      </React.Fragment>
     )
   }
 }

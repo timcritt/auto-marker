@@ -17,7 +17,8 @@ class Question extends React.Component {
     answerInputClassName: 'answer-input',
     isDisabled: false,
     checkButtonContent: 'check',
-    checkButtonClassName: 'check-answer-button'
+    checkButtonClassName: 'check-answer-button',
+    prependClassName: ''
   }
   render() { 
 
@@ -28,8 +29,8 @@ class Question extends React.Component {
         <div className="question-container">
         <div className="question-text-container">{this.props.questions[this.props.index].question}</div>
         <InputGroup id="enter-answer-field" >
-          <InputGroup.Prepend>
-            <InputGroup.Text  id="prepend">{questionNumber}</InputGroup.Text>
+          <InputGroup.Prepend >
+            <InputGroup.Text className={this.state.prependClassName} id="prepend">{questionNumber}</InputGroup.Text>
           </InputGroup.Prepend>
           <FormControl  className={this.state.answerInputClassName} onChange={this.updateUserAnswer}
             key={this.props.id} disabled={this.state.isDisabled}
@@ -72,7 +73,8 @@ class Question extends React.Component {
         answerInputClassName: 'correctly-answered',
         isDisabled: true,
         checkButtonContent: <TiTick/>,
-        checkButtonClassName: 'check-button-correct'
+        checkButtonClassName: 'check-button-correct',
+        prependClassName: 'prepend-correct'
       })
     } else {
       this.setState({

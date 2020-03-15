@@ -5,7 +5,7 @@ const htmlEntities = new Html5Entities();
 
 const sampleQuiz1 = {
   quizid: 1,
-  title:'My sample Quiz 1',
+  title:'Test Book 1: Test 1: UoE Part 1',
   questions: [
     {
       id: 'question3',
