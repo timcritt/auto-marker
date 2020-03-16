@@ -5,7 +5,7 @@ const htmlEntities = new Html5Entities();
 
 const sampleQuiz1 = {
   quizid: 1,
-  title:'Test Book 1: Test 1: UoE Part 1',
+  title:'FCE Test Book 1: Test 1: UoE Part 1',
   questions: [
     {
       id: 'question3',
@@ -141,9 +141,44 @@ const sampleQuiz5 = {
     }
   ]
 }
+const sampleQuiz6 = {
+  quizid: 5,
+  title:'My sample quiz 2',
+  questions: [
+    {
+      id: 'question19',
+      question: "Sample quiz 2 question 1 ",
+      answer: "sample quiz 2 answer 1",
+      hint: ''
+    },
+    {
+      id: 'question20',
+      question: "Sample quiz 2 question 2 ",
+      answer: "sample quiz 2 answer 2",
+      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
+    }
+  ]
+}
+const sampleQuiz7 = {
+  quizid: 5,
+  title:'My sample quiz 2',
+  questions: [
+    {
+      id: 'question19',
+      question: "Sample quiz 2 question 1 ",
+      answer: "sample quiz 2 answer 1",
+      hint: ''
+    },
+    {
+      id: 'question20',
+      question: "Sample quiz 2 question 2 ",
+      answer: "sample quiz 2 answer 2",
+      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
+    }
+  ]
+}
 
-
-const sampleQuizes = [sampleQuiz1, sampleQuiz2, sampleQuiz3, sampleQuiz4, sampleQuiz5];
+const sampleQuizes = [sampleQuiz1, sampleQuiz2, sampleQuiz3, sampleQuiz4, sampleQuiz5, sampleQuiz6, sampleQuiz7];
 
 // const sampleQuiz= {
 //   user: 'sample user',

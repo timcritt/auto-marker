@@ -90,7 +90,7 @@ const rootReducer = (state = initState, action) => {
     return {
       ...state,
       quizid: 99,
-      title:'',
+      title:'New Quiz',
       questions: [
         {
           id: 'question99',

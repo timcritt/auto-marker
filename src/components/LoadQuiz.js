@@ -11,24 +11,23 @@ class LoadQuiz extends React.Component {
   render () {
     return (
       <Container>
-        <Col id="edit-quiz-container" md={{ span: 6, offset: 3 }}>
-          <Row id="title-container" >
-            <div id="title-container" >
-              My Quizes
-            </div>
-          </Row>
+        <Col id="edit-quiz-container" md={{ span: 10, offset: 1 }}>
+         
           <Row>
-            <Col className="flex-container flex-right padding-right padding-bottom" md={{span: 6, offset: 6}}>
+            <Col className="flex-container flex-space-around padding-right padding-left padding-bottom" >
+              <div className="load-quiz-container-title" >
+                My Quizes
+              </div>
               <input className="search-field" placeHolder="search" onChange={this.handleUpdateFilterTerm}/>
             </Col>
           </Row>
           <div className="quiz-selector fixed-container">
           {sampleQuizes.filter( quiz => {
-            return quiz.title.toLowerCase().includes(this.state.filterTerm.toLowerCase())
+            return quiz.title.toLowerCase().includes(this.state.filterTerm.toLowerCase().trim())
           
             }).map( quiz => {
               return (
-                <Col className="flex-item" sm={{span:12}} md={{span: 12}} lg={{span: 6}}
+                <Col className="flex-item" sm={{span:12}} md={{span: 6}} lg={{span: 4}}
                   key={quiz.index}
                   quizid={quiz.quizid}
                   >
@@ -43,7 +42,7 @@ class LoadQuiz extends React.Component {
                 </Col>
             )})}
 
-            <Col className="flex-item" sm={{span:12}} md={{span: 6}}>
+            <Col className="flex-item" sm={{span:12}} md={{span: 6}} lg={{span: 4}}>
               <div className="margin-inside-columns new-quiz">
                 <Link className="add-quiz-x" onClick={this.props.newQuiz} to="/Quiz"  
                 >+
