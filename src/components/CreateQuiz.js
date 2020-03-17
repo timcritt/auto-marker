@@ -3,6 +3,7 @@ import QuestionField from './QuestionField'
 import { Container, Row, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
+import LoadingBar from './LoadingBar'
 
 //import { updateAnswer } from '../actions/quiz-actions';
 
@@ -30,7 +31,18 @@ class CreateQuiz extends React.Component {
   }
  
   render() {   
+    
+    if(this.props.loading) {
+      return (
+      <div className="loading-bar">
+          <LoadingBar ></LoadingBar>
+      </div>
+      )
+    }
+    
     return (
+
+      
       <React.Fragment>
         
         <Col id="title-field-row" >
@@ -72,7 +84,8 @@ class CreateQuiz extends React.Component {
 
 const mapStateToProps = state => ({
   title: state.title,
-  questions: state.questions
+  questions: state.questions,
+  loading: state.loading
 })
 
 const mapActionsToProps = (dispatch) => {

@@ -1,42 +1,26 @@
-export const UPDATE_QUIZ = 'quiz:updateQuiz';
-export const UPDATE_TITLE ='title:updateTitle';
-export const UPDATE_QUESTION = 'question:updateQuestion'
-export const ADD_QUESTION = 'question:addQuestion'
-export const DELETE_QUESTION = 'questuin:deleteQuestion'
 
-export function saveQuiz(newQuiz) {
+export const loading = () => {
   return {
-    type: UPDATE_QUIZ,
-    payload: {
-      quiz: newQuiz
-    }
+    type: "LOADING"
   }
 }
 
-export function updateTitle(newTitle) {
-  return {
-    type: UPDATE_TITLE,
-    payload: {
-      title: newTitle
-    }
+export const loadQuizAsync = (key) => {
+  return {type: "LOAD_QUIZ", key: key};
+}
+
+export const loadQuiz = (key) => {
+
+  return dispatch  => {
+    dispatch(loading())
+    
+    setTimeout( () => {
+      dispatch(loadQuizAsync(key));
+    }, 3000)   
+    
+
   }
 }
 
-export function updateQuestion(newQuestion) {
-  return {
-    type: UPDATE_QUESTION,
-    payload: {
-      question: newQuestion
-    }
-  }
-}
 
-export function addQuestion(newQuestion) {
-  return {
-    type: ADD_QUESTION,
-    payload: {
-      question: newQuestion
-    }
-  }
-}
 

@@ -3,6 +3,7 @@ import {Container, Col, Row, Button, InputGroup, FormControl} from 'react-bootst
 import sampleQuizes from '../sampleQuiz'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
+import {loadQuiz} from '../actions/quiz-actions'
 
 class LoadQuiz extends React.Component {
   state = {
@@ -18,7 +19,7 @@ class LoadQuiz extends React.Component {
               <div className="load-quiz-container-title" >
                 My Quizes
               </div>
-              <input className="search-field" placeHolder="search" onChange={this.handleUpdateFilterTerm}/>
+              <input className="search-field" placeholder="search" onChange={this.handleUpdateFilterTerm}/>
             </Col>
           </Row>
           <div className="quiz-selector fixed-container">
@@ -70,7 +71,7 @@ class LoadQuiz extends React.Component {
 }
 const mapActionsToProps = (dispatch) => {
   return {
-    loadQuiz: (key) => dispatch({type: "LOAD_QUIZ", key: key}),
+    loadQuiz: (key) => dispatch(loadQuiz(key)),
     newQuiz: () => dispatch({type: "NEW_QUIZ",})
   }
 }

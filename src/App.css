@@ -230,7 +230,7 @@ body {
   margin-top: 5vh;
 }
 .logo-marker {
-  color: #e8ead6;
+  color: white;
   font-weight: bolder;
   font-style: italic;
 }
@@ -241,6 +241,11 @@ body {
 }
 .logo-auto-navigation {
   color:var(--clickable-bg-color);
+  font-weight: bolder;
+  font-style: italic;
+}
+.logo-marker-navigation {
+  color:#e8ead6;
   font-weight: bolder;
   font-style: italic;
 }
@@ -420,4 +425,7 @@ body {
 }
 .load-quiz-container-title {
   font-size: large;
+}
+.loading-bar {
+  margin-top: 20px;
 }

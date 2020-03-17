@@ -1,9 +1,9 @@
 import React from 'react';
 import questionStatus from '../enums';
-import { Container, Col, Row, Button, InputGroup, FormControl} from 'react-bootstrap';
-import { saveQuiz } from '../actions/quiz-actions';
+import { Button, InputGroup, FormControl} from 'react-bootstrap';
+
 import { connect } from 'react-redux';
-import { TiTick, TiTimes} from 'react-icons/ti'
+import { TiTick,} from 'react-icons/ti'
 
 
 class Question extends React.Component {
@@ -96,7 +96,7 @@ const mapStateToProps = state => ({
 })
 
 const mapActionsToProps = {
-  onSaveQuiz: saveQuiz
+  onSaveQuiz: 'SAVE_QUIZ'
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(Question);

@@ -2,29 +2,40 @@ import React from 'react';
 import {Col, Row, Tab } from 'react-bootstrap';
 import Question from './Question';
 import { connect } from 'react-redux';
+import LoadingBar from './LoadingBar'
 
 class TakeQuiz extends React.Component {
 
   render() {
+    
+    if(this.props.loading) {
+      return (
+        <div className="loading-bar">
+          <LoadingBar ></LoadingBar>
+        </div>
+      )
+    }
+    
     return (
       <React.Fragment>
-        <Col>
-          <Row id="title-container">
-            {this.props.title}
-          </Row>
-        </Col>
-        <Col className="fixed-container">
-          {Object.keys(this.props.questions)
-            .map(key => 
-              <Question 
-                key={key}
-                index={key}
-                question={this.props.questions[key]}
-                >
-              </Question>   
-            )
-          }
-        </Col>
+          <Col>
+            <div>{this.props.loading}</div>
+            <Row id="title-container">
+              {this.props.title}
+            </Row>
+          </Col>
+          <Col className="fixed-container">
+            {Object.keys(this.props.questions)
+              .map(key => 
+                <Question 
+                  key={key}
+                  index={key}
+                  question={this.props.questions[key]}
+                  >
+                </Question>   
+              )
+            }
+          </Col>
       </React.Fragment>
     )
   }
@@ -32,13 +43,12 @@ class TakeQuiz extends React.Component {
 
 const mapStateToProps = state => ({
   title: state.title,
-  questions: state.questions
+  questions: state.questions,
+  loading: state.loading
 })
 
 const mapActionsToProps = (dispatch) => {
-  console.log("loading quix")
   return {
-    
     loadQuiz: () => dispatch({type: "LOAD_QUIZ"})
   }
    

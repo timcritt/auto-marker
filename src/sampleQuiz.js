@@ -180,24 +180,5 @@ const sampleQuiz7 = {
 
 const sampleQuizes = [sampleQuiz1, sampleQuiz2, sampleQuiz3, sampleQuiz4, sampleQuiz5, sampleQuiz6, sampleQuiz7];
 
-// const sampleQuiz= {
-//   user: 'sample user',
-//   title: 'sample quiz',
-//   questions: 
-//   {
-//     sample1: {
-//       question: "sample quiz question 1 ",
-//       answer: "sample quiz answer 1",
-//       hint: ''
-//       }
-//     ,
-//     sample2: {
-//     question: "sample quiz question 2 ",
-//     answer: "sample quiz answer 2",
-//     hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
-//     }
-//   }
-  
-// }
 
 export default sampleQuizes;
