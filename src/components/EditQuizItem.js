@@ -1,22 +1,17 @@
 import React from 'react';
-import { Container, Row, Col, ButtonToolbar, Button, InputGroup, FormControl, ButtonGroup } from 'react-bootstrap';
-import { Html5Entities } from 'html-entities';
 import { connect } from 'react-redux';
-import { saveQuiz } from '../actions/quiz-actions';
-import { IoIosArrowUp, IoIosArrowDown, IoIosSave, IoMdSettings, IoMdTrash, IoIosHelpCircleOutline, IoIosHelpCircle, IoMdKey,  } from 'react-icons/io'
-import { TiLightbulb, TiTick, TiDeleteOutline, TiTimes, TiPen } from 'react-icons/ti'
+import { Row, Col, ButtonToolbar, Button, InputGroup, FormControl, ButtonGroup } from 'react-bootstrap';
+import { IoIosArrowUp, IoIosArrowDown, IoIosSave, IoMdKey,  } from 'react-icons/io'
+import { TiLightbulb, TiTimes } from 'react-icons/ti'
+import EditTextAnswer from './EditTextAnswer'
+import EditMultipleChoiceAnswer from './EditMultipleChoiceAnswer';
 
-//this is needed to get around "dangerous code injection" protection in React. This method is safe. 
-const htmlEntities = new Html5Entities();
 
-class QuestionField extends React.Component {
-
+class EditQuizItem extends React.Component {
   state = {
     editedQuestion:  this.props.question.question,
-    editedAnswer: this.props.question ? this.props.question.answer : '',
     editedHint: this.props.question ? this.props.question.hint : '',
     questionIsUpdated: false,
-    answerIsUpdated: false,
   }
   updateAnswerField = (e) => {
     const newAnswer = e.currentTarget.value;
@@ -58,17 +53,13 @@ class QuestionField extends React.Component {
   }
   handleShiftQuestionUp = (id) => {
     this.props.shiftQuestionUp(id);
-    
   }
   handleShiftQuestionDown = (id) => {
     this.props.shiftQuestionDown(id);
   }
-
-
   handleDeleteQuestion = (id) => {
     this.props.deleteQuestion(id);
   }
-
   handleLoadQuiz = () => {
     //put some code here to pick which quiz to load
     console.log("loading quiz")
@@ -78,7 +69,6 @@ class QuestionField extends React.Component {
   render() {
 
     const questionNumber = `${(parseInt(this.props.index) + 1).toString()}`;
-    const editedAnswer = this.state.editedAnswer;
     const editedHint = this.state.editedHint
     return (
       <React.Fragment>
@@ -86,49 +76,40 @@ class QuestionField extends React.Component {
         <Col id="question-card-container">
           <Row >
             <Col>
-              <div>
-                <InputGroup id="enter-answer-field">
-                  <InputGroup.Prepend >
-                    <InputGroup.Text id="prepend-edit-answer-field">{questionNumber}</InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <FormControl placeholder="enter the question" defaultValue={this.state.editedQuestion}
-                    onChange={this.handleChangeQuestionField}
-                    //defaultValue is only for initial render. Changing state won't trigger render 
-                    //form field will only rerender when this key is changed. A bit
-                    key={this.props.id}
-                  />
-                </InputGroup>
-              </div>
+              <InputGroup id="enter-answer-field">
+                <InputGroup.Prepend >
+                  <InputGroup.Text id="prepend-edit-answer-field">{questionNumber}</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl placeholder="enter the question" defaultValue={this.state.editedQuestion}
+                  onChange={this.handleChangeQuestionField}
+                  //defaultValue is only for initial render. Changing state won't trigger re-render 
+                  //form field will only rerender when this key is changed.
+                  key={this.props.id}
+                />
+              </InputGroup>
             </Col>
           </Row>
           { /*answer Field */ }
           <Row >
             <Col>
-              <div>
-                <InputGroup>
-                  <InputGroup.Prepend>
-                    <InputGroup.Text><IoMdKey className="input-symbol"/></InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <FormControl placeholder="enter the answer" defaultValue={editedAnswer != null ? editedAnswer : ''}
-                    onChange={this.updateAnswerField}
-                  />
-                </InputGroup>
-              </div>
+              <EditMultipleChoiceAnswer
+                updateAnswerField={this.updateAnswerField}
+                answer={this.props.question.answer}
+                id={this.props.question.id}>
+              </EditMultipleChoiceAnswer>
             </Col>
           </Row>
           { /* hint field*/ }
           <Row>
             <Col>
-              <div>
-                <InputGroup>
-                  <InputGroup.Prepend >
-                    <InputGroup.Text><TiLightbulb className="input-symbol" /></InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <FormControl placeholder="enter a hint (optional)" defaultValue={editedHint != null ? editedHint : ''}
-                    onChange={this.updateHintField}
-                  />
-                </InputGroup>
-              </div>
+              <InputGroup>
+                <InputGroup.Prepend >
+                  <InputGroup.Text><TiLightbulb className="input-symbol" /></InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl placeholder="enter a hint (optional)" defaultValue={editedHint != null ? editedHint : ''}
+                  onChange={this.updateHintField}
+                />
+              </InputGroup>
             </Col>
           </Row>
           <Row >
@@ -168,4 +149,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionField);
+export default connect(mapStateToProps, mapDispatchToProps)(EditQuizItem);

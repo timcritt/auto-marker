@@ -1,9 +1,10 @@
 import React from 'react';
 import questionStatus from '../enums';
-import { Button, InputGroup, FormControl} from 'react-bootstrap';
-
+import {InputGroup, Button} from 'react-bootstrap';
+import TextAnswer from './TextAnswer';
+import MultipleChoiceAnswer from './MultipleChoiceAnswer'
 import { connect } from 'react-redux';
-import { TiTick,} from 'react-icons/ti'
+import { TiTick,} from 'react-icons/ti';
 
 
 class Question extends React.Component {
@@ -23,35 +24,57 @@ class Question extends React.Component {
   render() { 
 
     const questionNumber = `${(parseInt(this.props.index) + 1).toString()}`;
-
+    console.log(this.props.type)
+    if(this.props.type === 'multi') {
+      return (
+        <React.Fragment>
+          <div className="question-container">
+            <div className="question-text-container">{this.props.questions[this.props.index].question}</div>
+            <InputGroup id="enter-answer-field" className="flex-container flex-space-between" >
+              <MultipleChoiceAnswer questionNumber={questionNumber} 
+                prependClassName={this.state.prependClassName} 
+                answerInputClassName={this.state.answerInputClassName} 
+                updateUserAnswer={this.updateUserAnswer}
+                isDisabled={this.state.isDisabled}
+                id={this.props.index}
+                />
+              <Button className={this.state.checkButtonClassName} 
+                onClick={this.checkUserAnswer} 
+                disabled={this.state.isDisabled}
+                >
+                  {this.state.checkButtonContent}
+              </Button>
+            </InputGroup>
+          </div>
+        </React.Fragment>
+      )
+    } else {
     return (
       <React.Fragment>
-        <div className="question-container">
-        <div className="question-text-container">{this.props.questions[this.props.index].question}</div>
-        <InputGroup id="enter-answer-field" >
-          <InputGroup.Prepend >
-            <InputGroup.Text className={this.state.prependClassName} id="prepend">{questionNumber}</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl  className={this.state.answerInputClassName} onChange={this.updateUserAnswer}
-            key={this.props.id} disabled={this.state.isDisabled}
-          />
-          <Button className={this.state.checkButtonClassName} onClick={this.checkUserAnswer} disabled={this.state.isDisabled}>{this.state.checkButtonContent}</Button>
-        </InputGroup>
-        </div>
-      </React.Fragment>
-    )
-  }
-  renderQuestionStatus = () => {
-    if(this.state.answered) {
-      if(this.state.correctlyAnswered) {
-        return <span style={{color: "green"}}> {questionStatus.CORRECT} </span>
-      } else {
-        return <span style={{color: "#ae1e1e"}}> {questionStatus.INCORRECT} </span>
-      }
-    }
-    return <span>{questionStatus.UNANSWERED}</span>
+          <div className="question-container">
+            <div className="question-text-container">{this.props.questions[this.props.index].question}</div>
+            <InputGroup id="enter-answer-field" className="flex-container flex-space-between" >
+              <TextAnswer questionNumber={questionNumber} 
+                prependClassName={this.state.prependClassName} 
+                answerInputClassName={this.state.answerInputClassName} 
+                updateUserAnswer={this.updateUserAnswer}
+                isDisabled={this.state.isDisabled}
+                id={this.props.index}
+                />
+              <Button className={this.state.checkButtonClassName} 
+                onClick={this.checkUserAnswer} 
+                disabled={this.state.isDisabled}
+                >
+                  {this.state.checkButtonContent}
+              </Button>
+            </InputGroup>
+          </div>
+        </React.Fragment>
     
+      )
+    }
   }
+  
   toggleShowHint = () => {
     const hintVisibilty = this.state.hintVisibilty === 'hidden' ? 'visible' : 'hidden';
     this.setState({hintVisibilty})
@@ -65,6 +88,7 @@ class Question extends React.Component {
     });
   }
   checkUserAnswer = () => {
+    console.log(this.props.question.answer)
     if (this.props.question.answer.toLowerCase().trim() === this.state.userAnswer.toLowerCase().trim()) {
       console.log("question correct");
       this.setState({
@@ -91,7 +115,8 @@ class Question extends React.Component {
 const mapStateToProps = state => ({
   
   title: state.title,
-  questions: state.questions
+  questions: state.questions,
+
   
 })
 

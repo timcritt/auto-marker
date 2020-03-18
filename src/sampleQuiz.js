@@ -23,7 +23,7 @@ const sampleQuiz1 = {
 }
 const sampleQuiz2 = {
   quizid: 2,
-  title:'My sample quiz 2',
+  title:'One is multi',
   questions: [
     {
       id: 'question5',
@@ -34,8 +34,9 @@ const sampleQuiz2 = {
     {
       id: 'question6',
       question: "Sample quiz 2 question 2 ",
-      answer: "sample quiz 2 answer 2",
-      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
+      answer: "B",
+      hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `,
+      type: 'multi'
     }
   ]
 }

@@ -1,9 +1,10 @@
 import React from 'react';
-import QuestionField from './QuestionField'
+import EditQuizItem from './EditQuizItem'
 import { Container, Row, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import LoadingBar from './LoadingBar'
+import MultipleChoiceQuestion from './EditMultipleChoiceAnswer'
 
 //import { updateAnswer } from '../actions/quiz-actions';
 
@@ -20,12 +21,14 @@ class CreateQuiz extends React.Component {
     // })
     this.props.saveTitle(title)
   }
-  handleAddQuestion = () => {
+  handleAddQuestion = (type) => {    
+    
     const newQuestion = {
       id: `question${Date.now()}`,
       question: '',
       answer: '',
-      hint: ''
+      hint: '',
+      type: type
     }
     this.props.addNewQuestion(newQuestion);
   }
@@ -39,12 +42,8 @@ class CreateQuiz extends React.Component {
       </div>
       )
     }
-    
     return (
-
-      
       <React.Fragment>
-        
         <Col id="title-field-row" >
           <InputGroup >
             <FormControl  
@@ -56,10 +55,9 @@ class CreateQuiz extends React.Component {
           </InputGroup>
         </Col>
         <Col className="fixed-container create-container" >
-       
           {Object.keys(this.props.questions)
             .map(key => 
-              <QuestionField 
+              <EditQuizItem
                 index={key}
                 key={this.props.questions[key].id}
                 id={this.props.questions[key].id}
@@ -70,12 +68,14 @@ class CreateQuiz extends React.Component {
                 deleteQuestion={this.props.deleteQuestion}
                 addHint={this.props.addHint}
                 updateHint={this.props.updateHint}
+                
               />
             )
           }
         </Col>
         <Col className="add-question-button-container">
-          <Button className="add-question-button" block onClick={(e) => this.handleAddQuestion()}>+ Add Question</Button>
+          <Button className="add-question-button" block onClick={() => this.handleAddQuestion('multi')}>+ Add Question</Button>
+          <Button className="add-question-button" block onClick={() => this.handleAddQuestion('text')}>+ Add Question</Button>
         </Col>
       </React.Fragment>
     )
@@ -85,7 +85,8 @@ class CreateQuiz extends React.Component {
 const mapStateToProps = state => ({
   title: state.title,
   questions: state.questions,
-  loading: state.loading
+  loading: state.loading,
+  
 })
 
 const mapActionsToProps = (dispatch) => {

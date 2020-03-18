@@ -125,8 +125,12 @@ body {
   margin-top: 10px;
 }
 .answer-input {
+ 
   color: black;
   margin: 0px;
+  background-color: white;
+  border: 1px solid #ced4da;
+  box-sizing: border-box;
 }
 .check-answer-button {
   background-color: var(--clickable-bg-color);
@@ -173,9 +177,15 @@ body {
   display: flex;
   justify-content: space-between;
 }
+.correctly-answered {
+  border-color: green;
+  background-color: #c7dd9a;
+  border: 1px dashed green;
+}
 .correctly-answered:disabled {
   border-color: green;
   background-color: #c7dd9a;
+  
 }
 .incorrectly-answered {
   background-color: #f6f0f0;
@@ -215,6 +225,7 @@ body {
   padding: 0px;
   justify-content: center;
   color: black;
+  
 }
 .question-container {
   margin: 0px;
@@ -248,6 +259,12 @@ body {
   color:#e8ead6;
   font-weight: bolder;
   font-style: italic;
+}
+.input-group-text {
+  background-color: #ffffff;
+  border-right:none;
+  min-width: 42px;
+  justify-content: center;
 }
 .fixed-container {
   max-height: 50vh;
@@ -328,7 +345,7 @@ body {
 
 .prepend-correct {
   background-color: green;
-  color: black;
+  color: white;
   border-color: green;
 }
 .create-container {
@@ -382,6 +399,7 @@ body {
 }
 .flex-container {
   display: flex;
+
 }
 .flex-right {
   justify-content: flex-end;
@@ -389,8 +407,11 @@ body {
 .flex-left {
   justify-content: flex-start;
 }
-.flex-space-around {
+.flex-space-between {
   justify-content: space-between;
+}
+.flex-space-around {
+  justify-content: space-around;
 }
 .padding-right {
   padding-right: 32px;
@@ -414,12 +435,12 @@ body {
 }
 
 .padding-bottom {
-  padding-bottom: 10px;
+  padding-bottom: 6px;
 }
-.input-group-text {
-  background-color: #ffffff;
-  border-right:none;
+.padding-top {
+  padding-top: 6px;
 }
+
 .form-control {
   border-left: none;
 }
@@ -428,4 +449,10 @@ body {
 }
 .loading-bar {
   margin-top: 20px;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+.background-white {
+  background-color: white ;
 }

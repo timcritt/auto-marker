@@ -31,6 +31,7 @@ class TakeQuiz extends React.Component {
                   key={key}
                   index={key}
                   question={this.props.questions[key]}
+                  type={this.props.questions[key].type}
                   >
                 </Question>   
               )

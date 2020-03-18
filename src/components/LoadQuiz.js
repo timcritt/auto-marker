@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Col, Row, Button, InputGroup, FormControl} from 'react-bootstrap'
+import {Container, Col, Row} from 'react-bootstrap'
 import sampleQuizes from '../sampleQuiz'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
