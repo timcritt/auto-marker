@@ -26,10 +26,10 @@ class LoadQuiz extends React.Component {
           {sampleQuizes.filter( quiz => {
             return quiz.title.toLowerCase().includes(this.state.filterTerm.toLowerCase().trim())
           
-            }).map( quiz => {
+            }).map( (quiz,index) => {
               return (
                 <Col className="flex-item" sm={{span:12}} md={{span: 6}} lg={{span: 4}}
-                  key={quiz.index}
+                  key={index}
                   quizid={quiz.quizid}
                   >
                   <Link className="load-quiz-link" to='/Quiz' onClick={() => this.handleLoadQuiz(quiz.quizid)} >
@@ -58,17 +58,13 @@ class LoadQuiz extends React.Component {
   handleLoadQuiz (key)  {
     this.props.loadQuiz(key);
   }
-
   handleUpdateFilterTerm = (e) => {
     this.setState({
       filterTerm: e.currentTarget.value
     })
   }
-
-  handleFilterByName () {
-
-  }
 }
+
 const mapActionsToProps = (dispatch) => {
   return {
     loadQuiz: (key) => dispatch(loadQuiz(key)),

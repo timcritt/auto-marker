@@ -1,5 +1,5 @@
 import React from 'react';
-import Quiz from './components/Quiz';
+import QuizPanel from './components/QuizPanel';
 import CreateQuiz from './components/CreateQuiz';
 import { connect } from 'react-redux';
 import {Switch, BrowserRouter, Route} from 'react-router-dom'
@@ -24,7 +24,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Navigation/>
           <Switch>
-            <Route path='/quiz' exact component={Quiz} />
+            <Route path='/quiz' exact component={QuizPanel} />
             <Route path='/createQuiz' exact component={CreateQuiz} loadSampleQuestions={this.loadSampleQuestions}/>
             <Route path='/loadQuiz' exact component={LoadQuiz}/>
             <Route path='/' exact component={Landing} />

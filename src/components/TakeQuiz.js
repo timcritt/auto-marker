@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Row, Tab } from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
 import Question from './Question';
 import { connect } from 'react-redux';
 import LoadingBar from './LoadingBar'

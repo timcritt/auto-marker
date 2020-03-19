@@ -19,18 +19,14 @@ class MultipleChoiceAnswer extends React.Component {
           key={i}
           index={i}
           name={this.props.id}
-          updateUserAnswer={this.props.updateUserAnswer}
+          handleAnswerChange={this.handleAnswerChange}
           answer={this.props.answer}
-          isDisabled={this.props.isDisabled}
           
         />)
     }
     return (
       <React.Fragment>
-        <InputGroup.Prepend >
-          <InputGroup.Text className={this.props.prependClassName} id="prepend">{this.props.questionNumber}</InputGroup.Text>
-        </InputGroup.Prepend>
-        <div className={`flex-container flex-space-around flex-grow answer-input ${this.props.answerInputClassName}`}>
+        <div className="flex-container flex-space-around flex-grow answer-input ">
           {radioButtonItems.map(radioButton => {
             return radioButton;
           })}

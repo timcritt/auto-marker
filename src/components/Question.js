@@ -1,5 +1,4 @@
 import React from 'react';
-import questionStatus from '../enums';
 import {InputGroup, Button} from 'react-bootstrap';
 import TextAnswer from './TextAnswer';
 import MultipleChoiceAnswer from './MultipleChoiceAnswer'
@@ -24,7 +23,7 @@ class Question extends React.Component {
   render() { 
 
     const questionNumber = `${(parseInt(this.props.index) + 1).toString()}`;
-    console.log(this.props.type)
+    
     if(this.props.type === 'multi') {
       return (
         <React.Fragment>
@@ -37,6 +36,7 @@ class Question extends React.Component {
                 updateUserAnswer={this.updateUserAnswer}
                 isDisabled={this.state.isDisabled}
                 id={this.props.index}
+                question={this.props.question}
                 />
               <Button className={this.state.checkButtonClassName} 
                 onClick={this.checkUserAnswer} 
@@ -88,7 +88,7 @@ class Question extends React.Component {
     });
   }
   checkUserAnswer = () => {
-    console.log(this.props.question.answer)
+    
     if (this.props.question.answer.toLowerCase().trim() === this.state.userAnswer.toLowerCase().trim()) {
       console.log("question correct");
       this.setState({
@@ -113,11 +113,8 @@ class Question extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  
   title: state.title,
   questions: state.questions,
-
-  
 })
 
 const mapActionsToProps = {

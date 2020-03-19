@@ -2,11 +2,7 @@ import React from 'react'
 import {InputGroup, FormControl} from 'react-bootstrap'
 
 class TextAnswer extends React.Component {
-  
-  state = {
-    
-  }
-  
+
   render () {
     return (
       <React.Fragment>

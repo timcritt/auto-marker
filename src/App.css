@@ -137,14 +137,14 @@ body {
   border: none;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
-  min-width: 4em;
+  color: white;
 }
 .check-answer-button:hover {
   background-color: var(--clickable-hover-color);
   border: none;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
-  min-width: 4em;
+
 }
 .check-button-correct:disabled {
   background-color: green;
@@ -181,11 +181,12 @@ body {
   border-color: green;
   background-color: #c7dd9a;
   border: 1px dashed green;
+  color: black;
 }
 .correctly-answered:disabled {
   border-color: green;
   background-color: #c7dd9a;
-  
+  color: white;
 }
 .incorrectly-answered {
   background-color: #f6f0f0;
@@ -455,4 +456,32 @@ body {
 }
 .background-white {
   background-color: white ;
+}
+.input:disabled {
+  color: black;
+  background-color: red;
+}
+
+.align-self-stretch {
+  align-self: stretch;
+}
+.add-radio-button {
+  height: 100%;
+  width: 40px;
+}
+
+.radio {
+  display: inline-flex;
+  align-items: center;
+}
+
+.radio--large {
+  font-size: 2rem;
+}
+
+.radio-input {
+  margin: 0 0.5rem 0;
+}
+label {
+  margin-bottom: 0px;
 }

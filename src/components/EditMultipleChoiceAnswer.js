@@ -1,6 +1,6 @@
 import React from 'react';
-import {InputGroup, FormControl} from 'react-bootstrap';
-import {IoMdKey} from 'react-icons/io'
+import EditRadioButtonItem from './EditRadioButtonItem';
+import { connect } from 'react-redux';
 
 class EditMultipleChoiceAnswer extends React.Component {
   
@@ -10,32 +10,41 @@ class EditMultipleChoiceAnswer extends React.Component {
   }
 
   render () {    
+   
+    var radioButtonItems = [];
+
+    var i = 0;
+    for (i=0; i<this.props.multiNumber; i++) {
+
+      radioButtonItems.push(
+        <EditRadioButtonItem
+          key={i}
+          index={i}
+          name={this.props.id}
+          handleAnswerChange={this.handleAnswerChange}
+          answer={this.props.answer}
+        />)
+    }
+
     return (
       <React.Fragment>
-        <div className="flex-container flex-space-around flex-grow answer-input ">
-          <div className="padding-top padding-bottom">
-            <input type="radio" name={this.props.id} value="A" onChange={this.handleAnswerChange}/>
-            <span> A </span>
-          </div>  
-          <div className="padding-top padding-bottom">
-            <input type="radio" name={this.props.id} value="B" onChange={this.handleAnswerChange}/>
-            <span> B </span>
-          </div>
-          <div className="padding-top padding-bottom">
-            <input type="radio" name={this.props.id} value="C" onChange={this.handleAnswerChange}/>
-            <span> C </span>
-          </div>
-          <div className="padding-top padding-bottom">
-            <input type="radio" name={this.props.id} value="D" onChange={this.handleAnswerChange}/>
-            <span> D </span>
-          </div>      
+        <div className="flex-container flex-grow flex-space-around answer-input ">
+        {radioButtonItems.map(radioButton => {
+          return radioButton;
+        })}
+        
         </div>
       </React.Fragment>
     )
   }
+
   handleAnswerChange = (e) => {
     this.props.updateAnswerField(e);
   }
 }
 
+
+
 export default EditMultipleChoiceAnswer;
+
+

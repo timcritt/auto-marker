@@ -44,7 +44,8 @@ class EditQuizItem extends React.Component {
     for (i=0; i<questions.length; i++) {
       if (questions[i].id === id) {
         questions[i].question = this.state.editedQuestion;
-        questions[i].answer = this.state.editedAnswer;
+                                            //edge case: user clicks save on multiple choice questions item without updating field
+        questions[i].answer = this.state.editedAnswer  ? this.state.editedAnswer : this.props.answer;
         questions[i].hint = this.state.editedHint;
         
       }
@@ -62,14 +63,48 @@ class EditQuizItem extends React.Component {
   }
   handleLoadQuiz = () => {
     //put some code here to pick which quiz to load
-    console.log("loading quiz")
+    console.log("loading quiz from database")
     this.props.loadQuiz();
   }
  
   render() {
+    
+    console.log(this.props.id)
 
     const questionNumber = `${(parseInt(this.props.index) + 1).toString()}`;
-    const editedHint = this.state.editedHint
+    const editedHint = this.state.editedHint;
+    let questionComponent;
+
+    if (this.props.type === "multi") {
+      questionComponent =  (
+        <React.Fragment>
+          <div className="flex-container  " >            
+            <EditMultipleChoiceAnswer
+              updateAnswerField={this.updateAnswerField}
+              answer={this.props.question.answer}
+              multiNumber={this.props.numMultiAnswers}
+              id={this.props.question.id}>
+            </EditMultipleChoiceAnswer>
+            <div className="align-self-stretch" >
+              <button className="add-radio-button check-answer-button" 
+                onClick={ () => this.props.changeNumberOfanswers(this.props.id, -1)}> - </button>
+              <button className="add-radio-button check-answer-button" 
+                onClick={ () => this.props.changeNumberOfanswers(this.props.id, +1)}> + </button>
+            </div>
+          </div>
+        </React.Fragment>
+      )
+    } else {
+      questionComponent = (
+        <EditTextAnswer
+          updateAnswerField={this.updateAnswerField}
+          answer={this.props.question.answer}
+          id={this.props.question.id}>
+        </EditTextAnswer>
+      )
+    }
+ 
+
     return (
       <React.Fragment>
       {/* question field */}
@@ -92,11 +127,7 @@ class EditQuizItem extends React.Component {
           { /*answer Field */ }
           <Row >
             <Col>
-              <EditMultipleChoiceAnswer
-                updateAnswerField={this.updateAnswerField}
-                answer={this.props.question.answer}
-                id={this.props.question.id}>
-              </EditMultipleChoiceAnswer>
+              {questionComponent}
             </Col>
           </Row>
           { /* hint field*/ }
@@ -145,6 +176,7 @@ const mapDispatchToProps = (dispatch) => {
     saveQuestions: (questions) => { dispatch({type: 'SAVE_QUESTIONS', questions: questions})},
     shiftQuestionUp: (id) => { dispatch({type: 'SHIFT_QUESTION_UP', id: id})},
     shiftQuestionDown: (id) => { dispatch({type: 'SHIFT_QUESTION_DOWN', id: id})},
+    changeNumberOfanswers: (id, count) => { dispatch({type: 'CHANGE_NUMBER_OF_ANSWERS', id, count})},
   }
 }
 

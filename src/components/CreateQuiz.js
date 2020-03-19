@@ -1,12 +1,8 @@
 import React from 'react';
 import EditQuizItem from './EditQuizItem'
-import { Container, Row, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
+import { Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
 import LoadingBar from './LoadingBar'
-import MultipleChoiceQuestion from './EditMultipleChoiceAnswer'
-
-//import { updateAnswer } from '../actions/quiz-actions';
 
 class CreateQuiz extends React.Component {
 
@@ -26,9 +22,10 @@ class CreateQuiz extends React.Component {
     const newQuestion = {
       id: `question${Date.now()}`,
       question: '',
-      answer: '',
+      answer: type === 'multi' ? 'A' : '',
       hint: '',
-      type: type
+      type: type,
+      numMultiAnswers: 4
     }
     this.props.addNewQuestion(newQuestion);
   }
@@ -62,20 +59,23 @@ class CreateQuiz extends React.Component {
                 key={this.props.questions[key].id}
                 id={this.props.questions[key].id}
                 question={this.props.questions[key]}
+                numMultiAnswers={this.props.questions[key].numMultiAnswers}
                 updateQuestion={this.props.updateQuestion}
                 updateAnswer={this.props.updateAnswer}
                 addQuestion={this.props.addQuestion}
                 deleteQuestion={this.props.deleteQuestion}
                 addHint={this.props.addHint}
                 updateHint={this.props.updateHint}
+                type={this.props.questions[key].type}
+                answer={this.props.questions[key].answer}
                 
               />
             )
           }
         </Col>
         <Col className="add-question-button-container">
-          <Button className="add-question-button" block onClick={() => this.handleAddQuestion('multi')}>+ Add Question</Button>
-          <Button className="add-question-button" block onClick={() => this.handleAddQuestion('text')}>+ Add Question</Button>
+          <Button className="add-question-button" onClick={() => this.handleAddQuestion('multi')}>+ Add multiple choice question</Button>
+          <Button className="add-question-button" onClick={() => this.handleAddQuestion('text')}>+ Add text question</Button>
         </Col>
       </React.Fragment>
     )

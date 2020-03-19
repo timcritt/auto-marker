@@ -23,6 +23,32 @@ const rootReducer = (state = initState, action) => {
 
   switch(action.type) {
   
+    case 'CHANGE_NUMBER_OF_ANSWERS':
+        
+        newQuestions = JSON.parse(JSON.stringify(state.questions))
+        index = newQuestions.findIndex(e => e.id === action.id);      
+        
+        if (action.count > 0) {
+          if(state.questions[index].numMultiAnswers < 8) {
+            newQuestions[index].numMultiAnswers += action.count;
+          }
+        }
+
+        if (action.count < 0) {
+          if(state.questions[index].numMultiAnswers > 2) {
+            newQuestions[index].numMultiAnswers += action.count;
+          }
+        }
+
+        console.log(newQuestions[index].numMultiAnswers)
+
+        newQuestions = JSON.parse(JSON.stringify(newQuestions))
+
+        return {
+          ...state,
+          questions: newQuestions
+        }
+    
     case 'DELETE_QUESTION':
         newQuestions = state.questions.filter( question => {
         return action.id !== question.id;
