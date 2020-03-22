@@ -11,14 +11,10 @@ class CreateQuiz extends React.Component {
   }
   updateTitle = (e) => {
     const title = e.currentTarget.value;
-    //reactivate this if choosing to save title prop locally and then save to global state on save
-    // this.setState({
-    //   editedTitle: title
-    // })
     this.props.saveTitle(title)
   }
+  
   handleAddQuestion = (type) => {    
-    
     const newQuestion = {
       id: `question${Date.now()}`,
       question: '',
@@ -29,9 +25,8 @@ class CreateQuiz extends React.Component {
     }
     this.props.addNewQuestion(newQuestion);
   }
- 
+
   render() {   
-    
     if(this.props.loading) {
       return (
       <div className="loading-bar">
@@ -86,7 +81,6 @@ const mapStateToProps = state => ({
   title: state.title,
   questions: state.questions,
   loading: state.loading,
-  
 })
 
 const mapActionsToProps = (dispatch) => {
@@ -94,7 +88,6 @@ const mapActionsToProps = (dispatch) => {
     addNewQuestion: (newQuestion) => { dispatch({ type: 'ADD_NEW_QUESTION', newQuestion: newQuestion})},
     saveTitle: (title) => {dispatch({type: 'SAVE_TITLE', title: title})},
     loadQuiz: () => dispatch({type: "LOAD_QUIZ"}),
-    
   }
 }
 

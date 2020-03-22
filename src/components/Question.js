@@ -5,7 +5,6 @@ import MultipleChoiceAnswer from './MultipleChoiceAnswer'
 import { connect } from 'react-redux';
 import { TiTick,} from 'react-icons/ti';
 
-
 class Question extends React.Component {
 
   state = {
@@ -23,12 +22,13 @@ class Question extends React.Component {
   render() { 
 
     const questionNumber = `${(parseInt(this.props.index) + 1).toString()}`;
-    
+    console.log(this.props.question)
     if(this.props.type === 'multi') {
       return (
         <React.Fragment>
           <div className="question-container">
             <div className="question-text-container">{this.props.questions[this.props.index].question}</div>
+            {this.props.question.sectionTitle ? <div className="section-title" >{this.props.question.sectionTitle}</div> : <React.Fragment/> }
             <InputGroup id="enter-answer-field" className="flex-container flex-space-between" >
               <MultipleChoiceAnswer questionNumber={questionNumber} 
                 prependClassName={this.state.prependClassName} 
@@ -37,12 +37,12 @@ class Question extends React.Component {
                 isDisabled={this.state.isDisabled}
                 id={this.props.index}
                 question={this.props.question}
-                />
+              />
               <Button className={this.state.checkButtonClassName} 
                 onClick={this.checkUserAnswer} 
                 disabled={this.state.isDisabled}
-                >
-                  {this.state.checkButtonContent}
+              >
+                {this.state.checkButtonContent}
               </Button>
             </InputGroup>
           </div>
@@ -52,6 +52,7 @@ class Question extends React.Component {
     return (
       <React.Fragment>
           <div className="question-container">
+            {this.props.question.sectionTitle ? <div className="section-title" >{this.props.question.sectionTitle}</div> : <React.Fragment/> }
             <div className="question-text-container">{this.props.questions[this.props.index].question}</div>
             <InputGroup id="enter-answer-field" className="flex-container flex-space-between" >
               <TextAnswer questionNumber={questionNumber} 
@@ -60,17 +61,16 @@ class Question extends React.Component {
                 updateUserAnswer={this.updateUserAnswer}
                 isDisabled={this.state.isDisabled}
                 id={this.props.index}
-                />
+              />
               <Button className={this.state.checkButtonClassName} 
                 onClick={this.checkUserAnswer} 
                 disabled={this.state.isDisabled}
-                >
-                  {this.state.checkButtonContent}
+              >
+                {this.state.checkButtonContent}
               </Button>
             </InputGroup>
           </div>
         </React.Fragment>
-    
       )
     }
   }
@@ -78,7 +78,6 @@ class Question extends React.Component {
   toggleShowHint = () => {
     const hintVisibilty = this.state.hintVisibilty === 'hidden' ? 'visible' : 'hidden';
     this.setState({hintVisibilty})
-    
   }
   updateUserAnswer = (e) => {
     var userAnswer = e.currentTarget.value;
@@ -105,8 +104,6 @@ class Question extends React.Component {
         correctlyAnswered: false,
         answered: true,
         answerInputClassName: 'incorrectly-answered',
-        
-        
       })
     }
   }

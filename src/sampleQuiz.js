@@ -46,7 +46,8 @@ const sampleQuiz3 = {
   quizid: 3,
   title:'My sample Quiz 3',
   questions: [
-    {
+    { 
+      sectionTitle: 'Part 1',
       id: 'question7',
       question: "",
       answer: "sample quiz 3 answer 1",
@@ -94,11 +95,13 @@ const sampleQuiz3 = {
       answer: "",
       hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
     },
-    {
+    { 
+      sectionTitle: 'Part 2',
       id: 'question15',
       question: "",
       answer: "sample quiz 3 answer 2",
       hint: ` ${htmlEntities.decode('&#x266A;')} ______ Bridge is falling down; falling down. ${htmlEntities.decode('&#x266A;')} `
+
     },
     {
       id: 'question16',

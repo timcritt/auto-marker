@@ -1,4 +1,5 @@
 import sampleQuizes from "../sampleQuiz"
+import { FileCloudOff } from "material-ui/svg-icons";
 
 const initState = {
   quizid: 1,
@@ -24,7 +25,6 @@ const rootReducer = (state = initState, action) => {
   switch(action.type) {
   
     case 'CHANGE_NUMBER_OF_ANSWERS':
-        
         newQuestions = JSON.parse(JSON.stringify(state.questions))
         index = newQuestions.findIndex(e => e.id === action.id);      
         
@@ -40,18 +40,22 @@ const rootReducer = (state = initState, action) => {
           }
         }
 
-        console.log(newQuestions[index].numMultiAnswers)
-
-        newQuestions = JSON.parse(JSON.stringify(newQuestions))
-
         return {
           ...state,
           questions: newQuestions
         }
-    
+    case 'ADD_SECTION_TITLE':
+      newQuestions = JSON.parse(JSON.stringify(state.questions))
+      index = newQuestions.findIndex(e => e.id === action.id);
+      newQuestions[index].sectionTitle = action.title;
+
+      return {
+        ...state,
+        questions: newQuestions
+      }
     case 'DELETE_QUESTION':
         newQuestions = state.questions.filter( question => {
-        return action.id !== question.id;
+          return action.id !== question.id;
       })
       return  {
         ...state,

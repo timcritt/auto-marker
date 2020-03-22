@@ -18,7 +18,6 @@ class RadioButtonItem extends React.Component {
           />
           {letter}
         </label>
-     
       </div>
     )
   }

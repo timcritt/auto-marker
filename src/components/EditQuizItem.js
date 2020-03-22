@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, ButtonToolbar, Button, InputGroup, FormControl, ButtonGroup } from 'react-bootstrap';
-import { IoIosArrowUp, IoIosArrowDown, IoIosSave, IoMdKey,  } from 'react-icons/io'
+import { IoIosArrowUp, IoIosArrowDown, IoIosSave } from 'react-icons/io'
 import { TiLightbulb, TiTimes } from 'react-icons/ti'
 import EditTextAnswer from './EditTextAnswer'
 import EditMultipleChoiceAnswer from './EditMultipleChoiceAnswer';
-
 
 class EditQuizItem extends React.Component {
   state = {
@@ -29,6 +28,13 @@ class EditQuizItem extends React.Component {
       questionIsUpdated: true
     })
   }
+  handleChangeSectionTitle = (e) => {
+    const editedSectionTitle= e.currentTarget.value;
+    console.log(editedSectionTitle);
+    
+    this.props.addSectionTitle(this.props.id, editedSectionTitle);
+    
+  }
   updateHintField = (e) => {
     const newHint = e.currentTarget.value;
     console.log(`the updated hint field = ${newHint}`)
@@ -37,17 +43,14 @@ class EditQuizItem extends React.Component {
     })
   }
   handleSaveQuestion = (id) => {
-    
     const questions = JSON.parse(JSON.stringify(this.props.questions))
-    
     let i = 0;
     for (i=0; i<questions.length; i++) {
       if (questions[i].id === id) {
         questions[i].question = this.state.editedQuestion;
-                                            //edge case: user clicks save on multiple choice questions item without updating field
+                                           //edge case: user clicks save on multiple choice questions item without updating field first
         questions[i].answer = this.state.editedAnswer  ? this.state.editedAnswer : this.props.answer;
-        questions[i].hint = this.state.editedHint;
-        
+        questions[i].hint = this.state.editedHint;       
       }
     }    
     this.props.saveQuestions(questions)
@@ -104,59 +107,67 @@ class EditQuizItem extends React.Component {
       )
     }
  
-
     return (
       <React.Fragment>
       {/* question field */}
         <Col id="question-card-container">
-          <Row >
-            <Col>
-              <InputGroup id="enter-answer-field">
-                <InputGroup.Prepend >
-                  <InputGroup.Text id="prepend-edit-answer-field">{questionNumber}</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl placeholder="enter the question" defaultValue={this.state.editedQuestion}
-                  onChange={this.handleChangeQuestionField}
-                  //defaultValue is only for initial render. Changing state won't trigger re-render 
-                  //form field will only rerender when this key is changed.
-                  key={this.props.id}
-                />
-              </InputGroup>
-            </Col>
-          </Row>
-          { /*answer Field */ }
-          <Row >
-            <Col>
-              {questionComponent}
-            </Col>
-          </Row>
-          { /* hint field*/ }
-          <Row>
-            <Col>
-              <InputGroup>
-                <InputGroup.Prepend >
-                  <InputGroup.Text><TiLightbulb className="input-symbol" /></InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl placeholder="enter a hint (optional)" defaultValue={editedHint != null ? editedHint : ''}
-                  onChange={this.updateHintField}
-                />
-              </InputGroup>
-            </Col>
-          </Row>
-          <Row >
-            <Col >
-              <ButtonToolbar id="question-tool-bar" className="d-flex flex-column">
-                <ButtonGroup >
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleSaveQuestion(this.props.id)}><IoIosSave className='question-toolbar-symbol' /></Button>
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleDeleteQuestion(this.props.id)}><TiTimes className='question-toolbar-symbol' /></Button>
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleShiftQuestionDown(this.props.id)}><IoIosArrowDown className='question-toolbar-symbol' /></Button>
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleShiftQuestionUp(this.props.id)}><IoIosArrowUp className='question-toolbar-symbol'/></Button>
-                </ButtonGroup>
-              </ButtonToolbar>
-            </Col>
-          </Row>
-        </Col>
-      </React.Fragment>
+        {this.props.question.sectionTitle != null ? 
+          <React.Fragment>
+            <FormControl placeholder="enter section title" defaultValue={this.props.question.sectionTitle}
+              onChange={this.handleChangeSectionTitle}
+              key={`section${this.props.id}`}
+            />
+            <button onClick={() => this.props.addSectionTitle(this.props.id, undefined)}>remove section title</button>
+          </React.Fragment> : 
+        <button onClick={() => this.props.addSectionTitle(this.props.id, '')} >add section divide here</button>}
+        <Row >
+          <Col>
+            <InputGroup id="enter-answer-field">
+              <InputGroup.Prepend >
+                <InputGroup.Text id="prepend-edit-answer-field">{questionNumber}</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl placeholder="enter the question" defaultValue={this.state.editedQuestion}
+                onChange={this.handleChangeQuestionField}
+                //defaultValue is only for initial render. Changing state won't trigger re-render 
+                //form field will only rerender when this key is changed.
+                key={this.props.id}
+              />
+            </InputGroup>
+          </Col>
+        </Row>
+        { /*answer Field */ }
+        <Row >
+          <Col>
+            {questionComponent}
+          </Col>
+        </Row>
+        { /* hint field*/ }
+        <Row>
+          <Col>
+            <InputGroup>
+              <InputGroup.Prepend >
+                <InputGroup.Text><TiLightbulb className="input-symbol" /></InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl placeholder="enter a hint (optional)" defaultValue={editedHint != null ? editedHint : ''}
+                onChange={this.updateHintField}
+              />
+            </InputGroup>
+          </Col>
+        </Row>
+        <Row >
+          <Col >
+            <ButtonToolbar id="question-tool-bar" className="d-flex flex-column">
+              <ButtonGroup >
+                <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleSaveQuestion(this.props.id)}><IoIosSave className='question-toolbar-symbol' /></Button>
+                <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleDeleteQuestion(this.props.id)}><TiTimes className='question-toolbar-symbol' /></Button>
+                <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleShiftQuestionDown(this.props.id)}><IoIosArrowDown className='question-toolbar-symbol' /></Button>
+                <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.handleShiftQuestionUp(this.props.id)}><IoIosArrowUp className='question-toolbar-symbol'/></Button>
+              </ButtonGroup>
+            </ButtonToolbar>
+          </Col>
+        </Row>
+      </Col>
+    </React.Fragment>
     )
   }
 }
@@ -165,18 +176,17 @@ const mapStateToProps = (state) => {
   return { 
     title: state.title,
     questions: state.questions,
-    
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    
     deleteQuestion: (id) => { dispatch({type: 'DELETE_QUESTION', id: id})},
     saveQuestions: (questions) => { dispatch({type: 'SAVE_QUESTIONS', questions: questions})},
     shiftQuestionUp: (id) => { dispatch({type: 'SHIFT_QUESTION_UP', id: id})},
     shiftQuestionDown: (id) => { dispatch({type: 'SHIFT_QUESTION_DOWN', id: id})},
     changeNumberOfanswers: (id, count) => { dispatch({type: 'CHANGE_NUMBER_OF_ANSWERS', id, count})},
+    addSectionTitle: (id, title) => { dispatch({type: "ADD_SECTION_TITLE", id, title })}
   }
 }
 
