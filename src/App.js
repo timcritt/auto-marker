@@ -34,34 +34,6 @@ class App extends React.Component {
     )
   }
 
-  updateQuestion = (questionIndex, updatedQuestion) => {
-    const questions = {...this.state.questions}
-    questions[questionIndex].question = updatedQuestion;
-    this.setState(
-      questions
-    )
-  }
-
-  updateAnswer = (questionIndex, updatedAnswer) => {
-    const questions = {...this.state.questions}
-    questions[questionIndex].answer = updatedAnswer;
-    this.setState(
-      questions
-    )
-  }
-
-
-  
-  updateHint = (questionIndex, updatedHint) => {
-        
-    console.log(updatedHint)
-    const questions = {...this.state.questions}
-    questions[questionIndex].hint = updatedHint;
-    this.setState(
-      questions
-    )
-  }
-  
 }
 
 

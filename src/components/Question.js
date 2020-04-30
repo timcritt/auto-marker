@@ -20,17 +20,18 @@ class Question extends React.Component {
     prependClassName: ''
   }
   render() { 
-
+    
     const questionNumber = `${(parseInt(this.props.index) + 1).toString()}`;
-    console.log(this.props.question)
-    if(this.props.type === 'multi') {
+    
+    if(this.props.question.type === 'multi') {
       return (
         <React.Fragment>
           <div className="question-container">
-            <div className="question-text-container">{this.props.questions[this.props.index].question}</div>
+            <div className="question-text-container">{this.props.question.question}</div>
             {this.props.question.sectionTitle ? <div className="section-title" >{this.props.question.sectionTitle}</div> : <React.Fragment/> }
             <InputGroup id="enter-answer-field" className="flex-container flex-space-between" >
-              <MultipleChoiceAnswer questionNumber={questionNumber} 
+              <MultipleChoiceAnswer 
+                questionNumber={questionNumber} 
                 prependClassName={this.state.prependClassName} 
                 answerInputClassName={this.state.answerInputClassName} 
                 updateUserAnswer={this.updateUserAnswer}
@@ -49,11 +50,13 @@ class Question extends React.Component {
         </React.Fragment>
       )
     } else {
+
+     
     return (
       <React.Fragment>
           <div className="question-container">
             {this.props.question.sectionTitle ? <div className="section-title" >{this.props.question.sectionTitle}</div> : <React.Fragment/> }
-            <div className="question-text-container">{this.props.questions[this.props.index].question}</div>
+            <div className="question-text-container">{this.props.question.question}</div>
             <InputGroup id="enter-answer-field" className="flex-container flex-space-between" >
               <TextAnswer questionNumber={questionNumber} 
                 prependClassName={this.state.prependClassName} 
@@ -87,9 +90,10 @@ class Question extends React.Component {
     });
   }
   checkUserAnswer = () => {
-    
+    console.log('correct answer is ' + this.props.question.answer)
+    console.log('user answer is ' + this.state.userAnswer);
     if (this.props.question.answer.toLowerCase().trim() === this.state.userAnswer.toLowerCase().trim()) {
-      console.log("question correct");
+      console.log('corretct');
       this.setState({
         correctlyAnswered: true,
         answered: true,
@@ -109,13 +113,4 @@ class Question extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  title: state.title,
-  questions: state.questions,
-})
-
-const mapActionsToProps = {
-  onSaveQuiz: 'SAVE_QUIZ'
-}
-
-export default connect(mapStateToProps, mapActionsToProps)(Question);
+export default Question;

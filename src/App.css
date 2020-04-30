@@ -414,6 +414,13 @@ body {
 .flex-space-around {
   justify-content: space-around;
 }
+.flex-grow-1 {
+  flex-grow: 1;
+}
+.flex-grow-4 {
+  flex-grow: 4;
+}
+
 .padding-right {
   padding-right: 32px;
 }
@@ -487,4 +494,17 @@ label {
 }
 .section-title {
   font-size: x-large
+}
+.section-container {
+  background-color: #cfd7ff;
+  margin-bottom: 15px;
+  padding: 20px;
+}
+.section-title-container {
+  margin-bottom: 10px;
+  
+}
+
+.flex-align-self-end {
+  margin-left: auto;
 }

@@ -3,15 +3,10 @@ import EditRadioButtonItem from './EditRadioButtonItem';
 
 class EditMultipleChoiceAnswer extends React.Component {
   
-  state = {
-    editedAnswer: this.props.answer ? this.props.answer : '',
-    answerIsUpdated: false,
-  }
-
-  render () {    
+   render () {    
     var radioButtonItems = [];
     var i = 0;
-    for (i=0; i<this.props.multiNumber; i++) {
+    for (i=0; i<this.props.numMultipleChoice; i++) {
       radioButtonItems.push(
         <EditRadioButtonItem
           key={i}

@@ -13,6 +13,7 @@ class QuizPanel extends React.Component {
     return (
       <Container>
         <Col id="take-quiz-container" md={{ span: 6, offset: 3 }} lg={{span: 10, offset: 1}}>
+        <div>{this.props.numQuestions  }</div>
           <Tabs className="tab" defaultActiveKey="view" >
             <Tab   eventKey="view" title="View">
               <TakeQuiz />
@@ -28,8 +29,7 @@ class QuizPanel extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  title: state.title,
-  questions: state.questions
+  ...state
 })
 
 const mapActionsToProps = (dispatch) => {

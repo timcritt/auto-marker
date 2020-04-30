@@ -1,5 +1,5 @@
 import React from 'react';
-import EditQuizItem from './EditQuizItem'
+import EditSection from './EditSection'
 import { Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import LoadingBar from './LoadingBar'
@@ -14,18 +14,6 @@ class CreateQuiz extends React.Component {
     this.props.saveTitle(title)
   }
   
-  handleAddQuestion = (type) => {    
-    const newQuestion = {
-      id: `question${Date.now()}`,
-      question: '',
-      answer: type === 'multi' ? 'A' : '',
-      hint: '',
-      type: type,
-      numMultiAnswers: 4
-    }
-    this.props.addNewQuestion(newQuestion);
-  }
-
   render() {   
     if(this.props.loading) {
       return (
@@ -46,31 +34,21 @@ class CreateQuiz extends React.Component {
             />
           </InputGroup>
         </Col>
-        <Col className="fixed-container create-container" >
-          {Object.keys(this.props.questions)
-            .map(key => 
-              <EditQuizItem
+        <Col className="fixed-container">
+          {Object.keys(this.props.sections).map( key=> {
+                        
+            return ( 
+              <EditSection 
+                section={this.props.sections[key]}
+                key={this.props.sections[key].id}
+                id={this.props.sections[key].id}
                 index={key}
-                key={this.props.questions[key].id}
-                id={this.props.questions[key].id}
-                question={this.props.questions[key]}
-                numMultiAnswers={this.props.questions[key].numMultiAnswers}
-                updateQuestion={this.props.updateQuestion}
-                updateAnswer={this.props.updateAnswer}
-                addQuestion={this.props.addQuestion}
-                deleteQuestion={this.props.deleteQuestion}
-                addHint={this.props.addHint}
-                updateHint={this.props.updateHint}
-                type={this.props.questions[key].type}
-                answer={this.props.questions[key].answer}
-                
               />
             )
-          }
+          })}
         </Col>
         <Col className="add-question-button-container">
-          <Button className="add-question-button" onClick={() => this.handleAddQuestion('multi')}>+ Add multiple choice question</Button>
-          <Button className="add-question-button" onClick={() => this.handleAddQuestion('text')}>+ Add text question</Button>
+          <Button className="add-question-button" onClick={this.props.addSection}>+section</Button>
         </Col>
       </React.Fragment>
     )
@@ -78,16 +56,16 @@ class CreateQuiz extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  title: state.title,
-  questions: state.questions,
-  loading: state.loading,
+  sections: state.sections,
+  title: state.title
+
 })
 
 const mapActionsToProps = (dispatch) => {
   return {
-    addNewQuestion: (newQuestion) => { dispatch({ type: 'ADD_NEW_QUESTION', newQuestion: newQuestion})},
     saveTitle: (title) => {dispatch({type: 'SAVE_TITLE', title: title})},
     loadQuiz: () => dispatch({type: "LOAD_QUIZ"}),
+    addSection: () => dispatch({type: "ADD_SECTION"})
   }
 }
 

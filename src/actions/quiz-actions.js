@@ -6,7 +6,7 @@ export const loading = () => {
 }
 
 export const loadQuizAsync = (key) => {
-  return {type: "LOAD_QUIZ", key: key};
+  return {type: "LOAD_QUIZ", quizId: key};
 }
 
 export const loadQuiz = (key) => {
@@ -17,8 +17,6 @@ export const loadQuiz = (key) => {
     setTimeout( () => {
       dispatch(loadQuizAsync(key));
     }, 3000)   
-    
-
   }
 }
 
