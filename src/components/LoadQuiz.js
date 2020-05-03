@@ -13,14 +13,14 @@ class LoadQuiz extends React.Component {
       <Container>
         <Col id="edit-quiz-container" md={{ span: 10, offset: 1 }}>
           <Row>
-            <Col className="flex-container flex-space-around padding-right padding-left padding-bottom" >
+            <Col className="flex-container flex-space-between padding-right padding-left padding-bottom" >
               <div className="load-quiz-container-title" >
                 My Quizes
               </div>
               <input className="search-field" placeholder="search" onChange={this.handleUpdateFilterTerm}/>
             </Col>
           </Row>
-          <div className="quiz-selector fixed-container">
+          <div className="quiz-selector">
           {sampleQuizes.filter( quiz => {
             return quiz.title.toLowerCase().includes(this.state.filterTerm.toLowerCase().trim())
             }).map( (quiz,index) => {
@@ -65,7 +65,7 @@ class LoadQuiz extends React.Component {
 const mapActionsToProps = (dispatch) => {
   return {
     loadQuiz: (quizId) => dispatch({type: 'LOAD_QUIZ', quizId}),
-    newQuiz: () => dispatch({type: "NEW_QUIZ",})
+    newQuiz: () => dispatch({type: "NEW_QUIZ"})
   }
 }
 

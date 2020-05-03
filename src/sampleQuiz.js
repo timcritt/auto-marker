@@ -23,8 +23,9 @@ const sampleQuiz2 =
           id: 'question22',
           number: 2,
           question: '',
-          answer: 'new answer format 22',
-          hint: 'new hint format 22'
+          answer:[ '', ''], 
+          hint: 'new hint format 22',
+          type: 'twoPointText'
        }
       ],
       
@@ -56,9 +57,73 @@ const sampleQuiz2 =
     }
   ]
 }
+const sampleQuiz3 = 
+{
+  quizId: 3,
+  numQuestions: 2,
+  loading: false,
+  title:'Quiz 2',
+  sections: 
+  [
+    { 
+      id: 'section1',
+      numQuestions: 2,
+      sectionTitle: 'Part 1', 
+      questions:[
+        {
+          id: 'question21',
+          number: 1,
+          question: '',
+          answer: 'new answer format 21',
+          hint: 'new hint format 21'
+        },
+        {
+          id: 'question22',
+          number: 2,
+          question: '',
+          answer:[ '', ''], 
+          hint: 'new hint format 22',
+          type: 'twoPointText'
+       }
+      ],
+    },
+  ]
+}
+const sampleQuiz4 = 
+{
+  quizId: 3,
+  numQuestions: 2,
+  loading: false,
+  title:'Quiz 3',
+  sections: 
+  [
+    { 
+      id: 'section1',
+      numQuestions: 2,
+      sectionTitle: 'Part 1', 
+      questions:[
+        {
+          id: 'question21',
+          number: 1,
+          question: '',
+          answer: 'new answer format 21',
+          hint: 'new hint format 21'
+        },
+        {
+          id: 'question22',
+          number: 2,
+          question: '',
+          answer:[ '', ''], 
+          hint: 'new hint format 22',
+          type: 'twoPointText'
+       }
+      ],
+    },
+  ]
+}
 
-
-const sampleQuizes = [sampleQuiz2];
+const sampleQuizes = [sampleQuiz2, sampleQuiz3, sampleQuiz4, sampleQuiz2, sampleQuiz2, sampleQuiz3, sampleQuiz4, sampleQuiz2,
+                      sampleQuiz2, sampleQuiz3, sampleQuiz4, sampleQuiz2, sampleQuiz2, sampleQuiz3, sampleQuiz4, sampleQuiz2];
 
 
 export default sampleQuizes;

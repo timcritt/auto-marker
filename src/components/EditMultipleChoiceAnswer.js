@@ -18,7 +18,7 @@ class EditMultipleChoiceAnswer extends React.Component {
     }
     return (
       <React.Fragment>
-        <div className="flex-container flex-grow flex-space-around answer-input ">
+        <div id='answer-input-test' className="flex-container flex-grow flex-space-around answer-input ">
         {radioButtonItems.map(radioButton => {
           return radioButton;
         })}

@@ -1,6 +1,7 @@
 import sampleQuizes from "../sampleQuiz"
 import produce from "immer";
 
+
 const initState = {
   ...sampleQuizes[0]
 }
@@ -10,8 +11,17 @@ let index;
 const rootReducer = (state = initState, action) => 
   produce(state, draft => {
 
-    
     switch (action.type) {
+      // eslint-disable-next-line no-lone-blocks
+      case "SAVE_TITLE": {
+        draft.title = action.title
+        break
+      }
+      case "SAVE_SECTION_TITLE": {
+        const sectionIndex = draft.sections.findIndex(s => s.id === action.sectionId); 
+        draft.sections[sectionIndex].sectionTitle = action.sectionTitle;
+      }
+      break
       case "ADD_SECTION": { 
         let newSection = {
           id: `section${Date.now()}`,
@@ -33,11 +43,20 @@ const rootReducer = (state = initState, action) =>
       }
       case "ADD_NEW_QUESTION": {
         
+        var answer;
+        if(action.questionType === 'multi') {
+          answer = 'A'
+        } else if (action.questionType === 'twoPointText') {
+          answer = ['',''];
+        } else {
+          answer = ''
+        }
+
         const newQuestion = {
           id: `question${Date.now()}`,
           question: '',
           number:'',
-          answer: action.type === 'multi' ? 'A' : '',
+          answer,
           hint: 'dd',
           type: action.questionType,
           numMultipleChoice: 4
@@ -73,6 +92,15 @@ const rootReducer = (state = initState, action) =>
         draft.sections[sectionIndex].questions[questionIndex].answer = action.answer;
        
         break 
+      }
+      case "COPY_QUESTION": {
+        const sectionIndex = state.sections.findIndex(s => s.id === action.sectionId); 
+        const questionIndex = state.sections[sectionIndex].questions.findIndex(q => q.id ===action.questionId);
+        const copiedQuestion = JSON.parse(JSON.stringify(state.sections[sectionIndex].questions[questionIndex]));
+        copiedQuestion.id = `question${Date.now()}`;
+        draft.sections[sectionIndex].questions.splice(questionIndex + 1, 0, copiedQuestion);
+        draft.numQuestions ++
+        break;
       }
       case "LOAD_QUIZ":
         const newState = sampleQuizes.find( quiz => {
@@ -145,15 +173,28 @@ const rootReducer = (state = initState, action) =>
         const questionIndexSet = draft.sections[sectionIndexSet].questions.findIndex(q => q.id ===action.questionId)
         draft.sections[sectionIndexSet].questions[questionIndexSet].number = action.number; 
       break
-      case 'ASSIGN_QUESTION_NUMBER':
-      
+      case 'NEW_QUIZ': 
+        console.log("loading")
+        const newQuiz = {
+          
+            quizId: 10,
+            numQuestions: 0,
+            loading: false,
+            title: 'new quiz',
+            sections: []
+        }
+        
+       draft.quizId = newQuiz.quizId;
+       draft.numQuestions = newQuiz.numQuestions;
+       draft.loading = newQuiz.loading;
+       draft.title = newQuiz.title;
+       draft.sections = newQuiz.sections;
+
       break
       default: 
         return draft
     }
 })
-
-
 
 
 //   let newState = {...state}
