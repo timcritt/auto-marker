@@ -1,15 +1,6 @@
-An app that allows students in a classroom to correct their answers to multiple choice type questions while working from a textbook. 
+An app that allows students to correct their answers to multiple choice type questions while working from a textbook. 
 
 
-
-
-
-
-
-
-
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
