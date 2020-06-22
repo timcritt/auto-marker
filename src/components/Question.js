@@ -47,7 +47,7 @@ class Question extends React.Component {
       <React.Fragment>
         <div className="question-container">
           <div className="question-text-container">{this.props.question.question}</div>
-          {this.props.question.sectionTitle ? <div className="section-title" >{this.props.question.sectionTitle}</div> : <React.Fragment/> }
+          
           <InputGroup id="enter-answer-field" className="flex-container flex-space-between" >
             {answer}
             <Button className={this.state.checkButtonClassName} 

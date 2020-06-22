@@ -7,9 +7,9 @@ class TextAnswer extends React.Component {
     return (
       <React.Fragment>
         <InputGroup.Prepend >
-          <InputGroup.Text className={this.props.prependClassName} id="prepend">{this.props.questionNumber}</InputGroup.Text>
+          <InputGroup.Text className={this.props.prependClassName} id="prepend" >{this.props.questionNumber}</InputGroup.Text>
         </InputGroup.Prepend>
-        <FormControl  className={this.props.answerInputClassName} onChange={this.props.updateUserAnswer}
+        <FormControl  className={this.props.answerInputClassName} onChange={this.props.updateUserAnswer} placeholder="your answer..."
            key={this.props.id} disabled={this.props.isDisabled}
         />
       </React.Fragment>

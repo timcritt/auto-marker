@@ -6,7 +6,9 @@ class Section extends React.Component {
   render() {
     return (
       <React.Fragment>
+        
           <div className="section-title">{this.props.section.sectionTitle}</div>
+          <div  >
           {Object.keys(this.props.section.questions)
             .map(key => 
               <Question 
@@ -14,9 +16,10 @@ class Section extends React.Component {
                 index={key}
                 question={this.props.section.questions[key]}
                 >
-              </Question>   
+              </Question>
             )
           }
+        </div>
       </React.Fragment>
     )
   }

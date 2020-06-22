@@ -24,7 +24,7 @@ class EditSection extends React.Component {
           <div className="section-title-container flex-container flex-space-between">
             <InputGroup >
               <FormControl 
-                className="section-title" 
+                
                 placeholder="enter section title" 
                 defaultValue={this.props.section.sectionTitle} 
                 onChange={this.handleChangeSectionTitle}

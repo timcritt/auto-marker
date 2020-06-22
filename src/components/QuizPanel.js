@@ -12,7 +12,7 @@ class QuizPanel extends React.Component {
   render() {
     return (
       <Container>
-        <Col id="take-quiz-container" md={{ span: 6, offset: 3 }} lg={{span: 10, offset: 1}}>
+        <Col id="take-quiz-container" md={{ span: 8, offset: 2 }} lg={{span: 8, offset: 2}}>
         <div>{this.props.numQuestions  }</div>
           <Tabs className="tab" defaultActiveKey="view" >
             <Tab   eventKey="view" title="View">

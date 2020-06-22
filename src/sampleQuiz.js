@@ -122,8 +122,7 @@ const sampleQuiz4 =
   ]
 }
 
-const sampleQuizes = [sampleQuiz2, sampleQuiz3, sampleQuiz4, sampleQuiz2, sampleQuiz2, sampleQuiz3, sampleQuiz4, sampleQuiz2,
-                      sampleQuiz2, sampleQuiz3, sampleQuiz4, sampleQuiz2, sampleQuiz2, sampleQuiz3, sampleQuiz4, sampleQuiz2];
+const sampleQuizes = [sampleQuiz2, sampleQuiz3, sampleQuiz4];
 
 
 export default sampleQuizes;

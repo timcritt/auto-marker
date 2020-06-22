@@ -26,12 +26,9 @@
 body {
   margin: 0;
   background: rgb(219, 219, 219);
-   
-  
 }
 .landing{
   background: rgb(219, 219, 219); 
-  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,6 +55,8 @@ body {
   box-shadow: 31px 37px 3px -3px rgba(89, 89, 89, 0.32);
   border-radius: 3px;
 }
+
+
 .takeQuizButton {
   margin-top: 10px;
 }
@@ -121,15 +120,16 @@ body {
   color: black;
   padding: 0px, 0px, 0px, 0px;
 }
+
+
 .edit-quiz-button {
   margin-top: 10px;
 }
 .answer-input {
- 
   color: black;
   margin: 0px;
-  background-color: white;
-  border: 1px solid #ced4da;
+  background-color: transparent;
+  border: none;
   box-sizing: border-box;
 }
 .check-answer-button {
@@ -182,11 +182,13 @@ body {
   background-color: #c7dd9a;
   border: 1px dashed green;
   color: black;
+  
 }
 .correctly-answered:disabled {
   border-color: green;
   background-color: #c7dd9a;
   color: white;
+  
 }
 .incorrectly-answered {
   background-color: #f6f0f0;
@@ -226,15 +228,15 @@ body {
   padding: 0px;
   justify-content: center;
   color: black;
+  background-color: transparent;
+  border:none;
   
 }
-.question-container {
-  margin: 0px;
-  margin-bottom: 10px;
-}
+
 .question-text-container {
   font-size: 1.2rem;
-  margin-bottom: 5px;
+  padding-left:10px;
+
 }
 .quiz-list-container {
   margin-bottom: 2px;
@@ -266,6 +268,7 @@ body {
   border-right:none;
   min-width: 42px;
   justify-content: center;
+  box-sizing: border-box;
 }
 .fixed-container {
   
@@ -420,7 +423,6 @@ body {
 .flex-grow-4 {
   flex-grow: 4;
 }
-
 .padding-right {
   padding-right: 32px;
 }
@@ -464,7 +466,6 @@ body {
   color: black;
   background-color: red;
 }
-
 .align-self-stretch {
   align-self: stretch;
 }
@@ -472,16 +473,13 @@ body {
   height: 100%;
   width: 40px;
 }
-
 .radio {
   display: inline-flex;
   align-items: center;
 }
-
 .radio--large {
   font-size: 2rem;
 }
-
 .radio-input {
   margin: 0 0.5rem 0;
 }
@@ -489,22 +487,24 @@ label {
   margin-bottom: 0px;
 }
 .section-title {
-  font-size: x-large
+  font-size: x-large;
+  background-color: #7c7c7c;
+  padding-left: 10px;
+  margin-bottom: 5px;
+  color: white;
 }
 .section-container {
-  background-color: #cfd7ff;
+  background-color: #c8cce1;
   margin-bottom: 15px;
   padding: 20px;
 }
+
 .section-title-container {
   margin-bottom: 10px;
-  
 }
-
 .flex-align-self-end {
   margin-left: auto;
 }
-
 .answer-divider {
   display: inline-block;
   background-color: white;
@@ -518,4 +518,20 @@ label {
   display: flex;
   align-items: center;
   padding-bottom: 10px;
+}
+.question {
+  background-color: transparent;
+  
+}
+
+.question-container {
+  background-color: rgb(236, 236, 236);
+  border-width: 1px;
+  margin: 0px;
+  margin-bottom: 10px;
+  padding:0px;
+}
+
+.question-container:nth-child(even) {
+  background-color: rgb(206, 206, 206);
 }
