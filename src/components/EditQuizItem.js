@@ -1,132 +1,145 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+//3rd party components
 import { Row, Col, ButtonToolbar, Button, InputGroup, FormControl, ButtonGroup } from 'react-bootstrap';
 import { IoIosArrowUp, IoIosArrowDown, IoIosSave } from 'react-icons/io'
-import { TiLightbulb, TiTimes } from 'react-icons/ti';
+import { /*TiLightbulb,*/ TiTimes } from 'react-icons/ti';
 import {MdContentCopy} from 'react-icons/md';
+
+//custom components
 import EditTextAnswer from './EditTextAnswer';
 import EditMultipleChoiceAnswer from './EditMultipleChoiceAnswer';
 import EditTwoPointTextAnswer from './EditTwoPointTextAnswer';
 
-class EditQuizItem extends React.Component {
-  state = {
-    editedQuestion:  this.props.question ? this.props.question.question : '',
-    editedHint: this.props.question ? this.props.question.hint : '',
-    questionIsUpdated: false,
-    editedAnswer: this.props.question.answer ? this.props.question.answer : '',
-    answerIsUpdated: false,
-  }
-  updateAnswerField = (e) => {
-    const newAnswer = e.currentTarget.value;
-    this.setState({
-      editedAnswer: newAnswer,
-      answerIsUpdated: true
-    })
-  }
-  updateTwoPointAnswerField = (e, side) => {
+//action creators
+import 
+    { deleteQuestion, saveQuizItem, shiftQuestionUp, shiftQuestionDown, changeNumberOfAnswers, 
+      setQuestionNumber, copyQuestion } from '../actions/quiz-item-actions'
 
-    var editedAnswer = this.state.editedAnswer.slice();
+const EditQuizItem = (props) => {
+  
+  //local state to hold changes before save is made. Props are passed down from parent.
+  const [editedQuestion, setEditedQuestion] = useState(props.question ? props.question.question : '');
+  const [questionIsUpdated, setQuestionIsUpdated] = useState(false);
+  const [editedAnswer, setEditedAnswer] = useState(props.question.answer ? props.question.answer : '');
+  const [answerIsUpdated, setAnswerIsUpdated] = useState(false);
+
+  //assign state from store with redux hook
+  const quiz = useSelector(state => state)
+
+  //get access to dispatch via redux hook
+  const dispatch = useDispatch();
+
+  //updates local state
+  const updateAnswerField = (e) => {
+    const newAnswer = e.currentTarget.value;
+    setEditedAnswer(
+      newAnswer
+    );
+    setAnswerIsUpdated(
+      true
+    )
+  }
+
+  //updates local state
+  const updateTwoPointAnswerField = (e, side) => {
+
+    var newEditedAnswer = editedAnswer.slice();
 
     if (side ==='left') {
-      editedAnswer[0] = e.currentTarget.value;
+      newEditedAnswer[0] = e.currentTarget.value;
     } else if (side === 'right') {
-      editedAnswer[1] = e.currentTarget.value;
+      newEditedAnswer[1] = e.currentTarget.value;
     }
       
-    this.setState({
-      editedAnswer
-    });
+    setEditedAnswer(
+      newEditedAnswer
+    );
+    setAnswerIsUpdated(
+      true
+    )
+  }
 
-  }
-  handleChangeQuestionField = (e) => {
+  //updates local state
+  const handleChangeQuestionField = (e) => {
     const newQuestion = e.currentTarget.value;
-    this.setState({
-      editedQuestion: newQuestion,
-      questionIsUpdated: true
-    })
+    setEditedQuestion(
+      newQuestion
+    )
+    setQuestionIsUpdated(true)
   }
-  handleChangeSectionTitle = (e) => {
-    const editedSectionTitle= e.currentTarget.value;
-    this.props.addSectionTitle(this.props.id, editedSectionTitle);
-    
-  }
-  updateHintField = (e) => {
-    const newHint = e.currentTarget.value;
-    this.setState({
-      editedHint: newHint
-    })
-  }
-  
-  calculateItemNumber = () => {
+ 
+  const calculateItemNumber = () => {
     
     //Assign a number according to the quizitem's position in the questions array
-    var number = parseInt(this.props.index) + 1;
+    var number = parseInt(props.index) + 1;
 
     //Allows numbering to continue from previous non-empty section. 
     var previousSectionIndex; 
-    if(!this.props.restartNumbering && this.props.sectionIndex > 0) {
+
+    console.log(props.restartNumbering)
+    if(!props.restartNumbering && props.sectionIndex > 0) {
       //loop backwards over the sections array looking for a non empty section 
-      for (var i = this.props.sectionIndex -1; i >= 0; i--) {
-        if(this.props.sections[i].questions.length > 0) {
+      for (var i = props.sectionIndex -1; i >= 0; i--) {
+        if(quiz.sections[i].questions.length > 0) {
           //never reached if section is first in array OR if there are no previous non-empty sections OR "restart numbering" is selected. 
           previousSectionIndex = i;
-          const previousQuestionIndex = this.props.sections[previousSectionIndex].questions.length -1
-          number = number + this.props.sections[previousSectionIndex].questions[previousQuestionIndex].number
+          const previousQuestionIndex = quiz.sections[previousSectionIndex].questions.length -1;
+          number = number + quiz.sections[previousSectionIndex].questions[previousQuestionIndex].number;
           break
         }
       }
     }
-     
-    this.props.setQuestionNumber(this.props.sectionId, this.props.question.id, number)
+    console.log(number)
+    dispatch(setQuestionNumber(props.sectionId, props.question.id, number));
   }
  
-  render() {
-    this.calculateItemNumber();
+    calculateItemNumber();
     
     let questionComponent;
 
-    if (this.props.question.type === "multi") {
+    if (props.question.type === "multi") {
       questionComponent =  (
         <React.Fragment>
           <div className="flex-container  " >            
             <EditMultipleChoiceAnswer
-              updateAnswerField={this.updateAnswerField}
-              answer={this.state.editedAnswer}
-              numMultipleChoice={this.props.question.numMultipleChoice}
-              id={this.props.question.id}
-              index={this.props.question.index}
+              updateAnswerField={updateAnswerField}
+              answer={editedAnswer}
+              numMultipleChoice={props.question.numMultipleChoice}
+              id={props.question.id}
+              index={props.question.index}
             />
             <div className="align-self-stretch" >
               <button className="add-radio-button check-answer-button" 
-                onClick={ () => this.props.changeNumberOfanswers(this.props.sectionId, this.props.question.id, -1)}> - </button>
+                onClick={ () => dispatch(changeNumberOfAnswers(props.sectionId, props.question.id, -1))}> - </button>
               <button className="add-radio-button check-answer-button" 
-                onClick={ () => this.props.changeNumberOfanswers(this.props.sectionId, this.props.question.id, +1)}> + </button>
+                onClick={ () => dispatch(changeNumberOfAnswers(props.sectionId, props.question.id, +1))}> + </button>
             </div>
           </div>
         </React.Fragment>
       )
-    } else if (this.props.question.type === 'twoPointText') {
+    } else if (props.question.type === 'twoPointText') {
       questionComponent = (
         <React.Fragment>
         <div className="flex-container  " >            
           <EditTwoPointTextAnswer
-            updateTwoPointAnswerField={this.updateTwoPointAnswerField}
-            answer={this.state.editedAnswer}
-            id={this.props.question.id}
-            index={this.props.question.index}
+            updateTwoPointAnswerField={updateTwoPointAnswerField}
+            answer={editedAnswer}
+            id={props.question.id}
+            index={props.question.index}
           />
         </div>
       </React.Fragment>
-
       )
       
     } else {
       questionComponent = (
         <EditTextAnswer
-          updateAnswerField={this.updateAnswerField}
-          answer={this.state.editedAnswer}
-          id={this.props.question.id}
-          index={this.props.key}
+          updateAnswerField={updateAnswerField}
+          answer={editedAnswer}
+          id={props.question.id}
+          index={props.index}
         />
       )
     }    
@@ -138,14 +151,13 @@ class EditQuizItem extends React.Component {
             <Col>
               <InputGroup id="enter-answer-field">
                 <InputGroup.Prepend >
-                  <InputGroup.Text id="prepend-edit-answer-field">{this.props.question.number}</InputGroup.Text>
+                  <InputGroup.Text id="prepend-edit-answer-field">{props.question.number}</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl placeholder="enter the question" 
-                  onChange={this.handleChangeQuestionField} defaultValue={this.state.editedQuestion}
+                  onChange={handleChangeQuestionField} defaultValue={editedQuestion}
                   //defaultValue is only for initial render. Changing state won't trigger re-render 
                   //form field will only rerender when this key is changed.
-                  key={this.props.question.id}
-                  
+                  key={props.question.id}
                 />
               </InputGroup>
             </Col>
@@ -173,11 +185,11 @@ class EditQuizItem extends React.Component {
             <Col>
               <ButtonToolbar id="question-tool-bar" className="d-flex flex-column">
                 <ButtonGroup >
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.props.saveQuizItem(this.state.editedQuestion, this.props.question.id, this.props.sectionId, this.state.editedAnswer)}><IoIosSave className='question-toolbar-symbol' /></Button>
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.props.deleteQuestion(this.props.sectionId, this.props.question.id)}><TiTimes className='question-toolbar-symbol' /></Button>
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.props.copyQuestion(this.props.sectionId, this.props.question.id)}><MdContentCopy className='question-toolbar-symbol' /></Button>
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.props.shiftQuestionDown(this.props.sectionId, this.props.question.id)}><IoIosArrowDown className='question-toolbar-symbol' /></Button>
-                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => this.props.shiftQuestionUp(this.props.sectionId, this.props.question.id)}><IoIosArrowUp className='question-toolbar-symbol'/></Button>
+                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => dispatch(saveQuizItem(editedQuestion, props.question.id, props.sectionId, editedAnswer))}><IoIosSave className='question-toolbar-symbol' /></Button>
+                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => dispatch(deleteQuestion(props.sectionId, props.question.id))}><TiTimes className='question-toolbar-symbol' /></Button>
+                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => dispatch(copyQuestion(props.sectionId, props.question.id))}><MdContentCopy className='question-toolbar-symbol' /></Button>
+                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => dispatch(shiftQuestionDown(props.sectionId, props.question.id))}><IoIosArrowDown className='question-toolbar-symbol' /></Button>
+                  <Button className="question-tool-bar-button" variant="secondary" size="sm" onClick={() => dispatch(shiftQuestionUp(props.sectionId, props.question.id))}><IoIosArrowUp className='question-toolbar-symbol'/></Button>
                 </ButtonGroup>
               </ButtonToolbar>
             </Col>
@@ -186,25 +198,5 @@ class EditQuizItem extends React.Component {
       </React.Fragment>
     )
   }
-}
 
-const mapStateToProps = (state) => {
-
-  const  quiz = state
-  return quiz;
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteQuestion: (sectionId, questionId) => { dispatch({type: 'REMOVE_QUESTION', sectionId, questionId})},
-    saveQuizItem: (question, id, sectionId, answer) => { dispatch({type: 'SAVE_QUIZ_ITEM', question, questionId: id, sectionId, answer})},
-    shiftQuestionUp: (sectionId, questionId) => { dispatch({type: 'SHIFT_QUESTION_UP', sectionId, questionId})},
-    shiftQuestionDown: (sectionId, questionId) => { dispatch({type: 'SHIFT_QUESTION_DOWN', sectionId, questionId})},
-    changeNumberOfanswers: (sectionId, questionId, count) => { dispatch({type: 'CHANGE_NUMBER_OF_ANSWERS', sectionId, questionId, count})},
-    setQuestionNumber: (sectionId, questionId, number) => {dispatch({type: 'SET_QUESTION_NUMBER', sectionId, questionId, number})},
-    copyQuestion: (sectionId, questionId) => {dispatch({type: 'COPY_QUESTION', sectionId, questionId})}
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditQuizItem);
+export default EditQuizItem;

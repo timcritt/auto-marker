@@ -20,9 +20,11 @@ const rootReducer = (state = initState, action) =>
       case "SAVE_SECTION_TITLE": {
         const sectionIndex = draft.sections.findIndex(s => s.id === action.sectionId); 
         draft.sections[sectionIndex].sectionTitle = action.sectionTitle;
+        break
       }
-      break
-      case "ADD_SECTION": { 
+      case "ADD_SECTION": {   
+        console.log('reducer: add section')
+
         let newSection = {
           id: `section${Date.now()}`,
           numQuestions: 0,
@@ -71,7 +73,7 @@ const rootReducer = (state = initState, action) =>
         draft.sections[sectionIndex].questions[questionIndex-1].number = questionIndex;
         break
       }
-      case "REMOVE_QUESTION": {
+      case "DELETE_QUIZ_ITEM": {
        const sectionIndex = draft.sections.findIndex( (section) => {
           return section.id === action.sectionId
         })
@@ -169,6 +171,7 @@ const rootReducer = (state = initState, action) =>
         }
       break
       case 'SET_QUESTION_NUMBER':
+        console.log(action.number)
         const sectionIndexSet = draft.sections.findIndex(s => s.id === action.sectionId); 
         const questionIndexSet = draft.sections[sectionIndexSet].questions.findIndex(q => q.id ===action.questionId)
         draft.sections[sectionIndexSet].questions[questionIndexSet].number = action.number; 
@@ -191,6 +194,11 @@ const rootReducer = (state = initState, action) =>
        draft.sections = newQuiz.sections;
 
       break
+      case 'LOADING':
+        return {
+          ...draft,
+          loading: true
+        }  
       default: 
         return draft
     }

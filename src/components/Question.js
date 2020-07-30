@@ -87,6 +87,8 @@ class Question extends React.Component {
         console.log("right hand part is wrong")
       }
     } else {
+
+      console.log(this.props.question.answer);
       if (this.props.question.answer.toLowerCase().trim() === this.state.userAnswer.toLowerCase().trim()) {
         this.setState({
           correctlyAnswered: true,

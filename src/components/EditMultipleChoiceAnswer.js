@@ -1,35 +1,35 @@
 import React from 'react';
 import EditRadioButtonItem from './EditRadioButtonItem';
 
-class EditMultipleChoiceAnswer extends React.Component {
+const EditMultipleChoiceAnswer = (props) => {
   
-   render () {    
-    var radioButtonItems = [];
+  const handleAnswerChange = (e) => {
+    props.updateAnswerField(e);
+  }
+
+  var radioButtonItems = [];
+  
     var i = 0;
-    for (i=0; i<this.props.numMultipleChoice; i++) {
+    for (i=0; i < props.numMultipleChoice; i++) {
       radioButtonItems.push(
         <EditRadioButtonItem
           key={i}
           index={i}
-          name={this.props.id}
-          handleAnswerChange={this.handleAnswerChange}
-          answer={this.props.answer}
+          name={props.id}
+          handleAnswerChange={handleAnswerChange}
+          answer={props.answer}
         />)
     }
-    return (
-      <React.Fragment>
-        <div id='answer-input-test' className="flex-container flex-grow flex-space-around answer-input ">
-        {radioButtonItems.map(radioButton => {
-          return radioButton;
-        })}
-        </div>
-      </React.Fragment>
-    )
-  }
 
-  handleAnswerChange = (e) => {
-    this.props.updateAnswerField(e);
-  }
+  return (
+    <React.Fragment>
+      <div id='answer-input-test' className="flex-container flex-grow flex-space-around answer-input ">
+      {radioButtonItems.map(radioButton => {
+        return radioButton;
+      })}
+      </div>
+    </React.Fragment>
+  )
 }
 
 export default EditMultipleChoiceAnswer;

@@ -4,11 +4,17 @@ import sampleQuizes from '../sampleQuiz'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 
+import { loadQuiz } from '../actions/quiz-actions'
+
 class LoadQuiz extends React.Component {
   state = {
     filterTerm: ''
   }
+
   render () {
+    fetch('http://localhost:5000/quizzes/1').then(res => res.json()).then(data => console.log(data));
+
+
     return (
       <Container>
         <Col id="edit-quiz-container" md={{ span: 10, offset: 1 }}>
@@ -64,7 +70,7 @@ class LoadQuiz extends React.Component {
 
 const mapActionsToProps = (dispatch) => {
   return {
-    loadQuiz: (quizId) => dispatch({type: 'LOAD_QUIZ', quizId}),
+    loadQuiz: (quizId) => dispatch(loadQuiz(quizId)),
     newQuiz: () => dispatch({type: "NEW_QUIZ"})
   }
 }
