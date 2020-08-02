@@ -5,19 +5,19 @@ export const loading = () => {
   }
 }
 
-export const loadQuizAsync = (key) => {
+export const loadQuizAsync = (quiz_id) => {
   return {
-    type: "LOAD_QUIZ", quizId: key};
+    type: "LOAD_QUIZ", quiz_id};
 }
 
-export const loadQuiz = (key) => {
+export const loadQuiz = (quiz_id) => {
 
   return dispatch  => {
     dispatch(loading())
     
     setTimeout( () => {
-      dispatch(loadQuizAsync(key));
-    }, 3000)   
+      dispatch(loadQuizAsync(quiz_id));
+    }, 500)   
   }
 }
 
@@ -29,6 +29,7 @@ export const saveTitle = (title) => {
 }
 
 export const newQuiz = () => {
+  console.log('returning new quiz from the action creator')
   return {
     type: 'NEW_QUIZ'
   }

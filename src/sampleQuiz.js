@@ -1,9 +1,8 @@
 
 const sampleQuiz2 = 
 {
-  quizId: 2,
+  quizId: 1,
   numQuestions: 4,
-  loading: false,
   title:'FCE Use of English',
   sections: 
   [
@@ -31,7 +30,7 @@ const sampleQuiz2 =
       
     },
     { 
-      id: 'section2',
+      id: 2,
       numQuestions: 2,
       sectionTitle: 'Part 2',
       questions:[
@@ -59,9 +58,8 @@ const sampleQuiz2 =
 }
 const sampleQuiz3 = 
 {
-  quizId: 3,
+  quizId: 2,
   numQuestions: 2,
-  loading: false,
   title:'Quiz 2',
   sections: 
   [
@@ -93,7 +91,6 @@ const sampleQuiz4 =
 {
   quizId: 3,
   numQuestions: 2,
-  loading: false,
   title:'Quiz 3',
   sections: 
   [

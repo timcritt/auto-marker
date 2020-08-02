@@ -11,11 +11,6 @@ import Landing from './components/Landing';
 
 class App extends React.Component {
   
-  loadSampleQuestions = () => {
-  console.log(sampleQuizes)
-  this.props.onUpdateQuiz(sampleQuizes)
-  }
-
   render() {
     
     return (
@@ -25,7 +20,7 @@ class App extends React.Component {
         <Navigation/>
           <Switch>
             <Route path='/quiz' exact component={QuizPanel} />
-            <Route path='/createQuiz' exact component={CreateQuiz} loadSampleQuestions={this.loadSampleQuestions}/>
+            <Route path='/createQuiz' exact component={CreateQuiz}/>
             <Route path='/loadQuiz' exact component={LoadQuiz}/>
             <Route path='/' exact component={Landing} />
           </Switch>
@@ -33,7 +28,6 @@ class App extends React.Component {
       </React.Fragment>
     )
   }
-
 }
 
 

@@ -1,118 +1,105 @@
-import React from 'react';
-import {InputGroup, Button} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { InputGroup, Button } from 'react-bootstrap';
 import TextAnswer from './TextAnswer';
 import MultipleChoiceAnswer from './MultipleChoiceAnswer'
-import { connect } from 'react-redux';
 import { TiTick,} from 'react-icons/ti';
 
-class Question extends React.Component {
+const Question = (props) => {
 
-  state = {
-    userAnswer: "",
-    correctlyAnswered: false,
-    answered: false,
-    hintVisibilty: 'hidden',
-    hasSeenHint: false,
-    answerInputClassName: 'answer-input',
-    isDisabled: false,
-    checkButtonContent: 'check',
-    checkButtonClassName: 'check-answer-button',
-    prependClassName: ''
-  }
-  render() {     
+  //local state
+  const [userAnswer, setUserAnswer] = useState("");
+  const [correctlyAnswered, setCorrectlyAnswered] = useState(false);
+  const [answered, setAnswered] = useState(false);
+  const [hintVisibilty, setHintVisibility] = useState('hidden');
+  const [hasSeenHint, setHasSeenHint] = useState(false);
+  const [answerInputClassName, setAnswerInputClassName] = useState('answer-input');
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [checkButtonContent, setCheckButtonContent] = useState('check');
+  const [checkButtonClassName, setCheckButtonClassName] = useState('check-answer-button');
+  const [prependClassName, setPrependClassName] = useState('');   
     
-    var answer;
-    
-    if (this.props.question.type === 'multi') {
-      answer = <MultipleChoiceAnswer  
-                  prependClassName={this.state.prependClassName} 
-                  answerInputClassName={this.state.answerInputClassName} 
-                  updateUserAnswer={this.updateUserAnswer}
-                  isDisabled={this.state.isDisabled}
-                  id={this.props.index}
-                  question={this.props.question}
-                />
-    } else {
+  // const toggleShowHint = () => {
+  //   const hintVisibilty = hintVisibilty === 'hidden' ? 'visible' : 'hidden';
+  //   this.setState({hintVisibilty})
+  // }
 
-      answer = <TextAnswer questionNumber={this.props.question.number} 
-                  prependClassName={this.state.prependClassName} 
-                  answerInputClassName={this.state.answerInputClassName} 
-                  updateUserAnswer={this.updateUserAnswer}
-                  isDisabled={this.state.isDisabled}
-                  id={this.props.index}
-                />
-    }
-
-    return (
-      <React.Fragment>
-        <div className="question-container">
-          <div className="question-text-container">{this.props.question.question}</div>
-          
-          <InputGroup id="enter-answer-field" className="flex-container flex-space-between" >
-            {answer}
-            <Button className={this.state.checkButtonClassName} 
-              onClick={this.checkUserAnswer} 
-              disabled={this.state.isDisabled}
-            >
-              {this.state.checkButtonContent}
-            </Button>
-          </InputGroup>
-        </div>
-      </React.Fragment>
-    )
-  }
-  
-  toggleShowHint = () => {
-    const hintVisibilty = this.state.hintVisibilty === 'hidden' ? 'visible' : 'hidden';
-    this.setState({hintVisibilty})
-  }
-  updateUserAnswer = (e) => {
+  const updateUserAnswer = (e) => {
     var userAnswer = e.currentTarget.value;
-    this.setState({
-      userAnswer,
-      checkButtonContent: 'check',
-    });
+    setUserAnswer(userAnswer);
+    setCheckButtonContent('check');
   }
-  checkUserAnswer = () => {
 
-    if(Array.isArray(this.props.question.answer)) {
-      if(this.state.userAnswer.trim().startsWith(`${this.props.question.answer[0]} `) || this.state.userAnswer.trim() === this.props.question.answer[0]) {
+  const checkUserAnswer = () => {
+    if(Array.isArray(props.question.answer)) {
+      if(userAnswer.trim().startsWith(`${props.question.answer[0]} `) || userAnswer.trim() === props.question.answer[0]) {
         console.log("left hand part is right")
       } else {
         console.log("left hand part is wrong")
       }
-      if(this.state.userAnswer.trim().endsWith(`${this.props.question.answer[1]}`) || this.state.userAnswer.trim() === this.props.question.answer[0]) {
+      if(userAnswer.trim().endsWith(`${props.question.answer[1]}`) || userAnswer.trim() === props.question.answer[0]) {
         console.log("right hand par is right")
       } else {
         console.log("right hand part is wrong")
       }
     } else {
 
-      console.log(this.props.question.answer);
-      if (this.props.question.answer.toLowerCase().trim() === this.state.userAnswer.toLowerCase().trim()) {
-        this.setState({
-          correctlyAnswered: true,
-          answered: true,
-          answerInputClassName: 'correctly-answered',
-          isDisabled: true,
-          checkButtonContent: <TiTick/>,
-          checkButtonClassName: 'check-button-correct',
-          prependClassName: 'prepend-correct'
-        })
+      if (props.question.answer.toLowerCase().trim() === userAnswer.toLowerCase().trim()) {
+        setCorrectlyAnswered(true);
+        setAnswered(true);
+        setAnswerInputClassName('correctly-answered');
+        setIsDisabled(true);
+        setCheckButtonContent(<TiTick/>);
+        setCheckButtonClassName('check-button-correct');
+        setPrependClassName('prepend-correct');
+        
       } else {
-        this.setState({
-          correctlyAnswered: false,
-          answered: true,
-          answerInputClassName: 'incorrectly-answered',
-        })
+        setCorrectlyAnswered(false);
+        setAnswered(true);
+        setAnswerInputClassName('incorrectly-answered');
       }
     }
   }
-  checkTwoPointTextAnswer = () => {
-    if(this.state.userAnswer.tolowerCase().trim().startsWith(this.props.question.answerLeft)) {
 
-    }
+  var answer;
+
+  if (props.question.type === 'multi') {
+
+    answer = <MultipleChoiceAnswer  
+                prependClassName={prependClassName} 
+                answerInputClassName={answerInputClassName} 
+                updateUserAnswer={updateUserAnswer}
+                isDisabled={isDisabled}
+                id={props.index}
+                question={props.question}
+              />
+  } else {
+
+    answer = <TextAnswer questionNumber={props.question.number} 
+              prependClassName={prependClassName} 
+              answerInputClassName={answerInputClassName} 
+              updateUserAnswer={updateUserAnswer}
+              isDisabled={isDisabled}
+              id={props.index}
+            />
   }
+
+  return (
+    <React.Fragment>
+      <div className="question-container">
+        <div className="question-text-container">{props.question.question}</div>
+        
+        <InputGroup id="enter-answer-field" className="flex-container flex-space-between" >
+          {answer}
+          <Button className={checkButtonClassName} 
+            onClick={checkUserAnswer} 
+            disabled={isDisabled}
+          >
+            {checkButtonContent}
+          </Button>
+        </InputGroup>
+      </div>
+    </React.Fragment>
+  )
 }
 
 export default Question;

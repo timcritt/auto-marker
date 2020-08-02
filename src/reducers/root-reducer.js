@@ -107,7 +107,7 @@ const rootReducer = (state = initState, action) =>
       case "LOAD_QUIZ":
         const newState = sampleQuizes.find( quiz => {
 
-            return quiz.quizId === action.quizId
+            return quiz.quizId === action.quiz_id
         })
         draft.quizId = newState.quizId
         draft.numQuestions = newState.numQuestions
@@ -177,7 +177,7 @@ const rootReducer = (state = initState, action) =>
         draft.sections[sectionIndexSet].questions[questionIndexSet].number = action.number; 
       break
       case 'NEW_QUIZ': 
-        console.log("loading")
+        console.log("loading blank quiz")
         const newQuiz = {
           
             quizId: 10,

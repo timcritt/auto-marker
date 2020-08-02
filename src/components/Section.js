@@ -1,28 +1,26 @@
 import React from 'react';
 import Question from './Question';
-import {Col, Row} from 'react-bootstrap'
 
-class Section extends React.Component {
-  render() {
-    return (
-      <React.Fragment>
-        
-          <div className="section-title">{this.props.section.sectionTitle}</div>
-          <div  >
-          {Object.keys(this.props.section.questions)
-            .map(key => 
-              <Question 
-                key={key}
-                index={key}
-                question={this.props.section.questions[key]}
-                >
-              </Question>
-            )
-          }
-        </div>
-      </React.Fragment>
-    )
-  }
+const Section = (props) => {
+  
+  return (
+    <React.Fragment>
+        <div className="section-title">{props.section.sectionTitle}</div>
+        <div  >
+        {Object.keys(props.section.questions)
+          .map(key => 
+            <Question 
+              key={key}
+              index={key}
+              question={props.section.questions[key]}
+              >
+            </Question>
+          )
+        }
+      </div>
+    </React.Fragment>
+  )
+  
 }
 
 export default Section;

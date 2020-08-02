@@ -17,7 +17,7 @@ CREATE TABLE answer(
 );
 
 INSERT INTO quiz (quiz_title)
-VALUES ('quiz 1');
+VALUES ('quiz 2');
 
 INSERT INTO quiz (quiz_title)
 VALUES ('quiz 2');
